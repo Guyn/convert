@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 const { start } = require("./lib/settings");
-
 const { settings, colors, log, files, write, templates } = require("./lib");
 
 start()
