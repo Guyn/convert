@@ -1,0 +1,17 @@
+.hv-colors() {
+  <% var i=0; Object.keys(colors).forEach(function(color){ i++; %>
+    <%= _.PascalCase(color) %>: <%= colors[color] %>;
+  <% }); %>
+	}
+
+
+
+<% var i=0; Object.keys(colors).forEach(function(color){ i++; %>
+	@hv-<%= _.PascalCase(color) %>: <%= colors[color] %>;
+	@hv-<%= _.PascalCase(color) %>-h: <%= advancedColors[color].h %>;
+	@hv-<%= _.PascalCase(color) %>-s: <%= advancedColors[color].s %>;
+	@hv-<%= _.PascalCase(color) %>-l: <%= advancedColors[color].l %>;
+	@hv-<%= _.PascalCase(color) %>-r: <%= advancedColors[color].r %>;
+	@hv-<%= _.PascalCase(color) %>-g: <%= advancedColors[color].g %>;
+	@hv-<%= _.PascalCase(color) %>-b: <%= advancedColors[color].b %>;
+<% }); %>

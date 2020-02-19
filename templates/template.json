@@ -1,0 +1,8 @@
+{ 
+  <% var i=0; Object.keys(colors).forEach(function(color){ i++; %>
+     "<%= _.PascalCase(color) %>": "<%= colors[color] %>",
+     "<%= _.PascalCase(color) %>_hsl": [<%= advancedColors[color].h %>,<%= advancedColors[color].s %>,<%= advancedColors[color].l %>],
+     "<%= _.PascalCase(color) %>_rgb": [<%= advancedColors[color].r %>,<%= advancedColors[color].g %>,<%= advancedColors[color].b %>]
+     <% if (i < Object.keys(colors).length){ %>,<% } %> 
+  <% }); %>  
+}

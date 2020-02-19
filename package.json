@@ -1,0 +1,32 @@
+{
+	"name": "guyner",
+	"version": "1.0.0",
+	"description": "Convert Colors into multiple files",
+	"main": "cli.js",
+	"scripts": {
+		"test": "npm run test:success && npm run test:errors",
+		"test:success": "sh test/test.sh",
+		"test:errors": "sh test/errors.sh"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+ssh://git@github.com/silvandiepen/guyner.git"
+	},
+	"keywords": [
+		"Convert",
+		"Colors",
+		"Files"
+	],
+	"author": "Sil van Diepen",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/silvandiepen/guyner/issues"
+	},
+	"homepage": "https://github.com/silvandiepen/guyner#readme",
+	"dependencies": {
+		"ansi-256-colors": "^1.1.0",
+		"kleur": "^3.0.3",
+		"mono-str-width": "^1.0.0",
+		"yargs": "^15.1.0"
+	}
+}

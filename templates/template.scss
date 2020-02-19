@@ -1,0 +1,29 @@
+$colors: (
+  <% var i=0; Object.keys(colors).forEach(function(color){ i++; %>
+    "<%= _.PascalCase(color)  %>": <%= colors[color] %><% if (i < Object.keys(colors).length){ %>,<% } %> 
+  <% }); %>
+);
+
+$colors-ext: (
+  <% var i=0; Object.keys(colors).forEach(function(color){ i++; %>
+    "<%= _.PascalCase(color)  %>": (
+      "rgb": (<%= advancedColors[color].r %>,<%= advancedColors[color].g %>,<%= advancedColors[color].b %>),
+      "r": <%= advancedColors[color].r %>,
+      "g": <%= advancedColors[color].g %>, 
+      "b": <%= advancedColors[color].b %>,
+      "hsl": (<%= advancedColors[color].h %>,<%= advancedColors[color].s %>,<%= advancedColors[color].l %>),
+      "h": <%= advancedColors[color].h %>,
+      "s": <%= advancedColors[color].s %>, 
+      "l": <%= advancedColors[color].l %>)<% if (i < Object.keys(colors).length){ %>,<% } %> 
+  <% }); %>
+);
+
+<% var i=0; Object.keys(colors).forEach(function(color){ i++; %>
+	$transavia-<%= _.PascalCase(color) %>: <%= colors[color] %>;
+	$transavia-<%= _.lowercase(color) %>: <%= colors[color] %>;
+  $transavia-<%= _.PascalCase(color) %>-s: <%= advancedColors[color].s %>;
+	$transavia-<%= _.PascalCase(color) %>-l: <%= advancedColors[color].l %>;
+	$transavia-<%= _.PascalCase(color) %>-r: <%= advancedColors[color].r %>;
+  $transavia-<%= _.PascalCase(color) %>-g: <%= advancedColors[color].g %>;
+	$transavia-<%= _.PascalCase(color) %>-b: <%= advancedColors[color].b %>;
+<% }); %>

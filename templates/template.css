@@ -1,0 +1,11 @@
+:root{
+  <% var i=0; Object.keys(advancedColors).forEach(function(color){ i++; %>
+		--hv-<%= color %>: <%= advancedColors[color].hex %>;
+		--hv-<%= color %>-hue: <%= advancedColors[color].h %>;
+		--hv-<%= color %>-saturation: <%= advancedColors[color].s %>;
+		--hv-<%= color %>-lightness: <%= advancedColors[color].l %>;
+		--hv-<%= color %>-red: <%= advancedColors[color].r %>;
+		--hv-<%= color %>-green: <%= advancedColors[color].g %>;
+		--hv-<%= color %>-blue: <%= advancedColors[color].b %>;
+	<% }); %>
+}
