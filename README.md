@@ -16,8 +16,17 @@ But if you really want it in your project, you can install it using npm;
 npm install guyner
 ```
 
-or Yarm
+or Yarn;
 
 ```bash
 yarn add guyner
 ```
+
+### Arguments
+
+| Argument     | Default | Required                                | Options                   | Description                                                                                                     |
+| ------------ | ------- | --------------------------------------- | ------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `--src`      | `null`  | `true`                                  |                           | The source file (json) or folder (with json files) for your colors                                              |
+| `--dest`     | `null`  | `true`                                  |                           | Destination folder of the generated files.                                                                      |
+| `--type`     | `null`  | `false` (only if `template` is not set) | scss, less, css, json, js | The output type of file to be used.                                                                             |
+| `--template` | `null`  | `false` (only if `type` is not set)     |                           | A template file or folder with files to use to generate the files. When the provided templates arent sufficient |
