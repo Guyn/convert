@@ -1,0 +1,30 @@
+$colors: (
+  <% var i=0; Object.keys(colors).forEach(function(color){ i++; %>
+    "<%= _.PascalCase(colors[color].name)  %>": <%= colors[color].hex %><% if (i < Object.keys(colors).length){ %>,<% } %> 
+  <% }); %>
+);
+
+$colors-ext: (
+  <% var i=0; Object.keys(colors).forEach(function(color){ i++; %>
+    "<%= _.PascalCase(colors[color].name)  %>": (
+      "rgb": (<%= colors[color].rgb.r %>,<%= colors[color].rgb.g %>,<%= colors[color].rgb.b %>),
+      "r": <%= colors[color].rgb.r %>,
+      "g": <%= colors[color].rgb.g %>, 
+      "b": <%= colors[color].rgb.b %>,
+      "hsl": (<%= colors[color].hsl.h %>,<%= colors[color].hsl.s %>,<%= colors[color].hsl.l %>),
+      "h": <%= colors[color].hsl.h %>,
+      "s": <%= colors[color].hsl.s %>, 
+      "l": <%= colors[color].hsl.l %>)<% if (i < Object.keys(colors).length){ %>,<% } %> 
+  <% }); %>
+);
+
+<% var i=0; Object.keys(colors).forEach(function(color){ i++; %>
+	$<%= settings.prefix %><%= _.PascalCase(colors[color].name) %>: <%= colors[color].hex %>;
+	$<%= settings.prefix %><%= _.lowercase(colors[color].name) %>: <%= colors[color].hex %>;
+  $<%= settings.prefix %><%= _.PascalCase(colors[color].name) %>-h: <%= colors[color].hsl.h %>;
+  $<%= settings.prefix %><%= _.PascalCase(colors[color].name) %>-s: <%= colors[color].hsl.s %>;
+	$<%= settings.prefix %><%= _.PascalCase(colors[color].name) %>-l: <%= colors[color].hsl.l %>;
+	$<%= settings.prefix %><%= _.PascalCase(colors[color].name) %>-r: <%= colors[color].rgb.r %>;
+  $<%= settings.prefix %><%= _.PascalCase(colors[color].name) %>-g: <%= colors[color].rgb.g %>;
+	$<%= settings.prefix %><%= _.PascalCase(colors[color].name) %>-b: <%= colors[color].rgb.b %>;
+<% }); %>

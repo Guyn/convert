@@ -30,3 +30,16 @@ node cli.js \
     --type json \
     --type js \
     --type less 
+
+echo "> 05: Create a Multiple files from source with external template"
+node cli.js \
+    --src test/source/valid \
+    --dest tmp/multi-source-multi-file \
+    --template templates/colors.css.template
+
+echo "> 06: Create a Multiple files from source with multiple external templates"
+node cli.js \
+    --src test/source/valid \
+    --dest tmp/multi-source-multi-file \
+    --template templates/colors.css.template \
+    --template templates/colors.scss

@@ -1,26 +1,26 @@
 export const colors = {
 	hex: { 
 	<% var i=0; Object.keys(colors).forEach(function(color){ i++; %>
-		"<%= _.PascalCase(color) %>": "<%= colors[color] %>"
+		"<%= _.PascalCase(colors[color].name) %>": "<%= colors[color].hex %>"
 		<% if (i < Object.keys(colors).length){ %>,<% } %> 
 	<% }); %>
 	},
 	hsl: { 
 	<% var i=0; Object.keys(colors).forEach(function(color){ i++; %>
-		"<%= _.PascalCase(color) %>": {
-			"h": <%= advancedColors[color].h %>,
-			"s": <%= advancedColors[color].s %>,
-			"l": <%= advancedColors[color].l %>
+		"<%= _.PascalCase(colors[color].name) %>": {
+			"h": <%= colors[color].hsl.h %>,
+			"s": <%= colors[color].hsl.s %>,
+			"l": <%= colors[color].hsl.l %>
 		}
 		<% if (i < Object.keys(colors).length){ %>,<% } %> 
 	<% }); %>
 	},
 	rgb: { 
 	<% var i=0; Object.keys(colors).forEach(function(color){ i++; %>
-		"<%= _.PascalCase(color) %>": {
-			"r": <%= advancedColors[color].r %>,
-			"g": <%= advancedColors[color].g %>,
-			"b": <%= advancedColors[color].b %>
+		"<%= _.PascalCase(colors[color].name) %>": {
+			"r": <%= colors[color].rgb.r %>,
+			"g": <%= colors[color].rgb.g %>,
+			"b": <%= colors[color].rgb.b %>
 		}
 		<% if (i < Object.keys(colors).length){ %>,<% } %> 
 	<% }); %>

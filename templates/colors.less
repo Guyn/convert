@@ -1,0 +1,17 @@
+.<%= settings.prefix %>colors() {
+  <% var i=0; Object.keys(colors).forEach(function(color){ i++; %>
+    <%= _.PascalCase(colors[color].name) %>: <%= colors[color].hex %>;
+  <% }); %>
+	}
+
+
+
+<% var i=0; Object.keys(colors).forEach(function(color){ i++; %>
+	@<%= settings.prefix %><%= _.PascalCase(colors[color].name) %>: <%= colors[color].hex %>;
+	@<%= settings.prefix %><%= _.PascalCase(colors[color].name) %>-h: <%= colors[color].hsl.h %>;
+	@<%= settings.prefix %><%= _.PascalCase(colors[color].name) %>-s: <%= colors[color].hsl.s %>;
+	@<%= settings.prefix %><%= _.PascalCase(colors[color].name) %>-l: <%= colors[color].hsl.l %>;
+	@<%= settings.prefix %><%= _.PascalCase(colors[color].name) %>-r: <%= colors[color].rgb.r %>;
+	@<%= settings.prefix %><%= _.PascalCase(colors[color].name) %>-g: <%= colors[color].rgb.g %>;
+	@<%= settings.prefix %><%= _.PascalCase(colors[color].name) %>-b: <%= colors[color].rgb.b %>;
+<% }); %>

@@ -31,6 +31,29 @@ yarn add guyner
 | `--type`     | `false` (only if `template` is not set) | `scss`, `less`, `css`, `json`, `js` | The output type of file to be used.                                                                             |
 | `--template` | `false` (only if `type` is not set)     |                                     | A template file or folder with files to use to generate the files. When the provided templates arent sufficient |
 | `--advanced` | `false`                                 | `hsla`, `rgba`                      | Add more output types to the files.                                                                             |
+| `--prefix`   | `false`                                 |                                     | A prefix will be used within the fixes to prefix variables or objects                                           |
+
+### Custom templates
+
+Besides the templates already made which can be used easily. You an also define your own template. Templates are using the ejs template syntax.
+
+Examples can be found in the `/templates` folder of this package.
+
+Example of the css template;
+
+```
+:root{
+  <% var i=0; Object.keys(colors).forEach(function(color){ i++; %>
+		--<%= settings.prefix %><%= colors[color].name %>: <%= colors[color].hex %>;
+		--<%= settings.prefix %><%= colors[color].name %>-hue: <%= colors[color].hsl.h %>;
+		--<%= settings.prefix %><%= colors[color].name %>-saturation: <%= colors[color].hsl.s %>;
+		--<%= settings.prefix %><%= colors[color].name %>-lightness: <%= colors[color].hsl.l %>;
+		--<%= settings.prefix %><%= colors[color].name %>-red: <%= colors[color].rgb.r %>;
+		--<%= settings.prefix %><%= colors[color].name %>-green: <%= colors[color].rgb.g %>;
+		--<%= settings.prefix %><%= colors[color].name %>-blue: <%= colors[color].rgb.b %>;
+	<% }); %>
+}
+```
 
 ## Wishlist
 

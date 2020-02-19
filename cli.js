@@ -1,10 +1,8 @@
 #!/usr/bin/env node
 
 const { start } = require("./lib/settings");
-const settings = require("./lib/settings");
-const colors = require("./lib/colors");
-const log = require("./lib/log.js");
-const files = require("./lib/files.js");
+
+const { settings, colors, log, files, write, templates } = require("./lib");
 
 start()
 	.then(settings.CHECK_SETTINGS)
@@ -18,8 +16,17 @@ start()
 	.then(log.NO_FILES)
 	.then((res) => log.MID_BLOCK(res, "Color Source files"))
 	.then(log.COLORS)
+	.then(templates.GET_EXT_TEMPLATES)
+	.then(templates.GET_INT_TEMPLATE)
+	.then(templates.GET_TEMPLATE_DATA)
 	.then(colors.CREATE_DATASETS)
+	.then((res) => log.MID_BLOCK(res, "Build Files"))
+	.then(write.BUILD_FILES)
+	.then(write.CREATE_DEST)
+	.then(write.WRITE_FILES)
+	.then(log.END_BLOCK)
 	.then((res) => {
 		// console.log(res);
-	})
-	.then(log.END_BLOCK);
+		// console.log(res.dataSets[0].colors[0]);
+		// return res;
+	});
