@@ -24,9 +24,10 @@ yarn add guyner
 
 ### Arguments
 
-| Argument     | Default | Required                                | Options                   | Description                                                                                                     |
-| ------------ | ------- | --------------------------------------- | ------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| `--src`      | `null`  | `true`                                  |                           | The source file (json) or folder (with json files) for your colors                                              |
-| `--dest`     | `null`  | `true`                                  |                           | Destination folder of the generated files.                                                                      |
-| `--type`     | `null`  | `false` (only if `template` is not set) | scss, less, css, json, js | The output type of file to be used.                                                                             |
-| `--template` | `null`  | `false` (only if `type` is not set)     |                           | A template file or folder with files to use to generate the files. When the provided templates arent sufficient |
+| Argument     | Required                                | Options                             | Description                                                                                                     |
+| ------------ | --------------------------------------- | ----------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `--src`      | `true`                                  |                                     | The source file (json) or folder (with json files) for your colors                                              |
+| `--dest`     | `true`                                  |                                     | Destination folder of the generated files.                                                                      |
+| `--type`     | `false` (only if `template` is not set) | `scss`, `less`, `css`, `json`, `js` | The output type of file to be used.                                                                             |
+| `--template` | `false` (only if `type` is not set)     |                                     | A template file or folder with files to use to generate the files. When the provided templates arent sufficient |
+| `--advanced` | `false`                                 | `hsla`, `rgba`                      | Add more output types to the files.                                                                             |
