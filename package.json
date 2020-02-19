@@ -1,6 +1,6 @@
 {
 	"name": "guyner",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"description": "Convert Colors into multiple files",
 	"main": "cli.js",
 	"scripts": {
