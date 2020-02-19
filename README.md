@@ -33,6 +33,39 @@ yarn add guyner
 | `--advanced` | `false`                                 | `hsla`, `rgba`                      | Add more output types to the files.                                                                             |
 | `--prefix`   | `false`                                 |                                     | A prefix will be used within the fixes to prefix variables or objects                                           |
 
+### Usage
+
+Guyner can be used as a `npx` script or as a node_module in your package. The easiest way is to install it and use it in a script in your package.json like;
+
+```json
+// package.json
+{
+	"scripts": {
+		"convert-colors": "guyner --src assets/my-colors.json --dest src/assets/scss/ --type scss"
+	}
+}
+```
+
+You could also, due to the total amount of arguments which could be big, create a bash script which can be ran by the scripts.
+
+```json
+// package.json
+{
+	"scripts": {
+		"convert-colors": "sh scripts/colors.sh"
+	}
+}
+```
+
+```bash
+echo "> 01: Create a SCSS file from source"
+npx guyner \
+     --src assets/my-colors.json \
+     --dest src/assets/scss/ \
+     --type scss
+     --type css
+```
+
 ### Custom templates
 
 Besides the templates already made which can be used easily. You an also define your own template. Templates are using the ejs template syntax.
@@ -42,17 +75,19 @@ Examples can be found in the `/templates` folder of this package.
 Example of the css template;
 
 ```
+
 :root{
-  <% var i=0; Object.keys(colors).forEach(function(color){ i++; %>
-		--<%= settings.prefix %><%= colors[color].name %>: <%= colors[color].hex %>;
-		--<%= settings.prefix %><%= colors[color].name %>-hue: <%= colors[color].hsl.h %>;
-		--<%= settings.prefix %><%= colors[color].name %>-saturation: <%= colors[color].hsl.s %>;
-		--<%= settings.prefix %><%= colors[color].name %>-lightness: <%= colors[color].hsl.l %>;
-		--<%= settings.prefix %><%= colors[color].name %>-red: <%= colors[color].rgb.r %>;
-		--<%= settings.prefix %><%= colors[color].name %>-green: <%= colors[color].rgb.g %>;
-		--<%= settings.prefix %><%= colors[color].name %>-blue: <%= colors[color].rgb.b %>;
-	<% }); %>
+<% var i=0; Object.keys(colors).forEach(function(color){ i++; %>
+--<%= settings.prefix %><%= colors[color].name %>: <%= colors[color].hex %>;
+--<%= settings.prefix %><%= colors[color].name %>-hue: <%= colors[color].hsl.h %>;
+--<%= settings.prefix %><%= colors[color].name %>-saturation: <%= colors[color].hsl.s %>;
+--<%= settings.prefix %><%= colors[color].name %>-lightness: <%= colors[color].hsl.l %>;
+--<%= settings.prefix %><%= colors[color].name %>-red: <%= colors[color].rgb.r %>;
+--<%= settings.prefix %><%= colors[color].name %>-green: <%= colors[color].rgb.g %>;
+--<%= settings.prefix %><%= colors[color].name %>-blue: <%= colors[color].rgb.b %>;
+<% }); %>
 }
+
 ```
 
 ## Wishlist
@@ -76,3 +111,7 @@ Any help to make this package better is very welcome! So if you like this idea a
 Authored and maintained by Sil van Diepen with help from contributors ([list](https://github.com/silvandiepen/guyner/contributors)).
 
 [github.com/silvandiepen](https://github.com/silvandiepen) · GitHub [@Sil van Diepen](https://github.com/silvandiepen) · Twitter [@silvandiepen](https://twitter.com/silvandiepen)
+
+```
+
+```
