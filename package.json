@@ -3,10 +3,12 @@
 	"version": "1.2.0",
 	"description": "Convert Colors into multiple files",
 	"main": "cli.js",
+	"bin": "cli.js",
 	"scripts": {
 		"test": "npm run test:success && npm run test:errors",
 		"test:success": "sh test/test.sh",
-		"test:errors": "sh test/errors.sh"
+		"test:errors": "sh test/errors.sh",
+		"test:npx": "npx guyner --src test/source/valid/sourc1.json --dest tmp/npx-test --template scss"
 	},
 	"repository": {
 		"type": "git",

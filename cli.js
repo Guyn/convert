@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+"use strict";
 
 const { start } = require("./lib/settings");
 const { settings, colors, log, files, write, templates } = require("./lib");
