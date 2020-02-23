@@ -73,13 +73,13 @@
 #     --filename _source_1 \
 #     --filename _source_2
 
-echo "> 11: Create a files from multiple destinations with multiple filenames"
-node cli.js \
-    --src test/source/valid \
-    --dest tmp/multi-source-multi-file \
-    --template templates/colors.css.template \
-    --template templates/colors.scss \
-    --filename testfilename
+# echo "> 11: Create a files from multiple destinations with multiple filenames"
+# node cli.js \
+#     --src test/source/valid \
+#     --dest tmp/multi-source-multi-file \
+#     --template templates/colors.css.template \
+#     --template templates/colors.scss \
+#     --filename testfilename
 
 # echo "> 12: Create a files from multiple destinations getting auto numbered"
 # node cli.js \
@@ -96,3 +96,11 @@ node cli.js \
 #     --dest tmp/13-multi-output/style.scss \
 #     --output hex \
 #     --output hsl
+
+echo "> 14: Multi output"
+node cli.js \
+    --src test/source/valid/ \
+    --dest tmp/13-multi-output/style.scss \
+    --output hex \
+    --output hsl \
+    --combine
