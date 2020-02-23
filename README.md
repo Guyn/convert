@@ -24,14 +24,16 @@ yarn add guyner
 
 ### Arguments
 
-| Argument     | Required                                | Options                                     | Description                                                                                                     |
-| ------------ | --------------------------------------- | ------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| `--src`      | `true`                                  |                                             | The source file (json) or folder (with json files) for your colors                                              |
-| `--dest`     | `true`                                  |                                             | Destination folder of the generated files.                                                                      |
-| `--type`     | `false` (only if `template` is not set) | `scss`, `less`, `css`, `json`, `js`, `yaml` | The output type of file to be used.                                                                             |
-| `--template` | `false` (only if `type` is not set)     |                                             | A template file or folder with files to use to generate the files. When the provided templates arent sufficient |
-| `--advanced` | `false`                                 | `hsla`, `rgba`                              | Add more output types to the files.                                                                             |
-| `--prefix`   | `false`                                 |                                             | A prefix will be used within the fixes to prefix variables or objects                                           |
+| Argument     | Required                          | Options                                     | Description                                                                                                                                                                                       |
+| ------------ | --------------------------------- | ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--src`      | ✔                                 | file / path `string`                        | The source file (json) or folder (with json files) for your colors                                                                                                                                |
+| `--dest`     | ✔                                 | file / path `string`                        | Destination folder of the generated files.                                                                                                                                                        |
+| `--type`     | × (only if `template` is not set) | `scss`, `less`, `css`, `json`, `js`, `yaml` | The output type of file to be used.                                                                                                                                                               |
+| `--template` | × (only if `type` is not set)     | `string`                                    | A template file or folder with files to use to generate the files. When the provided templates arent sufficient                                                                                   |
+| `--advanced` | ×                                 | `hsla`, `rgba`                              | Add more output types to the files.                                                                                                                                                               |
+| `--prefix`   | ×                                 | `boolean`                                   | A prefix will be used within the fixes to prefix variables or objects                                                                                                                             |
+| `--combine`  | ×                                 | `boolean`                                   | When given multiple sources, they can be combined into one output file                                                                                                                            |
+| `--filename` | ×                                 | `string`                                    | You can give an altername output name for your file. They will use they extension of your template. When given multiple destinations (not combined) you need to give the same amount of filenames |
 
 ### Usage
 

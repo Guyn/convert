@@ -6,24 +6,24 @@ $colors: (
   <% }); -%>
 );
 
-<% if(settings.rgb) { -%>$colors-rgb: (
-  <% var i=0; Object.keys(colors).forEach(function(color){ i++; %>
+<% if(settings.output.includes('rgb')) { -%>$colors-rgb: (
+  <% var i=0; Object.keys(colors).forEach(function(color){ i++; -%>
     "<%= _.PascalCase(colors[color].name)  %>":  (<%= colors[color].rgb.r %>,<%= colors[color].rgb.g %>,<%= colors[color].rgb.b %>)<% if (i < Object.keys(colors).length){ %>,<% } %> 
   <% }); %>
 );<% } -%>
 
-<% if(settings.hsl) { -%>$colors-hsl: (
-  <% var i=0; Object.keys(colors).forEach(function(color){ i++; %>
+<% if(settings.output.includes('hsl')) { -%>$colors-hsl: (
+  <% var i=0; Object.keys(colors).forEach(function(color){ i++; -%>
     "<%= _.PascalCase(colors[color].name)  %>":  (<%= colors[color].hsl.h %>,<%= colors[color].hsl.s %>,<%= colors[color].hsl.l %>)<% if (i < Object.keys(colors).length){ %>,<% } %> 
   <% }); %>
 );<% } -%>
 
-<% var i=0; Object.keys(colors).forEach(function(color){ i++; %>
+<% var i=0; Object.keys(colors).forEach(function(color){ i++; -%>
 	$<%= settings.prefix %><%= _.safeVariable(_.kebabCase(colors[color].name)) %>: <%= colors[color].hex %>;
-<% if(settings.hsl) { %>	$<%= settings.prefix %><%= _.safeVariable(_.kebabCase(colors[color].name)) %>-h: <%= _.toRoundNumber(colors[color].hsl.h) %>;
+<% if(settings.output.includes('hsl')) { -%>	$<%= settings.prefix %><%= _.safeVariable(_.kebabCase(colors[color].name)) %>-h: <%= _.toRoundNumber(colors[color].hsl.h) %>;
   $<%= settings.prefix %><%= _.safeVariable(_.kebabCase(colors[color].name)) %>-s: <%= _.toRoundNumber(colors[color].hsl.s) %>;
 	$<%= settings.prefix %><%= _.safeVariable(_.kebabCase(colors[color].name)) %>-l: <%= _.toRoundNumber(colors[color].hsl.l) %>;<% } %>
-<% if(settings.rgb) { %>	$<%= settings.prefix %><%= _.safeVariable(_.kebabCase(colors[color].name)) %>-r: <%= colors[color].rgb.r %>;
+<% if(settings.output.includes('rgb')) { -%>	$<%= settings.prefix %><%= _.safeVariable(_.kebabCase(colors[color].name)) %>-r: <%= colors[color].rgb.r %>;
   $<%= settings.prefix %><%= _.safeVariable(_.kebabCase(colors[color].name)) %>-g: <%= colors[color].rgb.g %>;
 	$<%= settings.prefix %><%= _.safeVariable(_.kebabCase(colors[color].name)) %>-b: <%= colors[color].rgb.b %>;<% } -%>
 <% }); -%>

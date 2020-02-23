@@ -27,6 +27,7 @@
 	"homepage": "https://github.com/silvandiepen/guyner#readme",
 	"dependencies": {
 		"ansi-256-colors": "^1.1.0",
+		"cli-block": "^1.1.2",
 		"ejs": "^3.0.1",
 		"kleur": "^3.0.3",
 		"mono-str-width": "^1.0.0",
