@@ -1,14 +1,15 @@
 {
-	"name": "guyner",
+	"name": "@guyn/convert",
 	"version": "1.3.1",
 	"description": "Convert Colors into multiple files",
 	"main": "cli.js",
-	"bin": "cli.js",
+	"bin": "dist/cli.js",
 	"scripts": {
 		"test": "npm run test:success && npm run test:errors",
 		"test:success": "sh test/test.sh",
 		"test:errors": "sh test/errors.sh",
-		"test:npx": "npx guyner --src test/source/valid/sourc1.json --dest tmp/npx-test --template scss"
+		"test:npx": "npx guyner --src test/source/valid/sourc1.json --dest tmp/npx-test --template scss",
+		"build": "rollup -c"
 	},
 	"repository": {
 		"type": "git",
@@ -33,5 +34,16 @@
 		"mono-str-width": "^1.0.0",
 		"window-size": "^1.1.1",
 		"yargs": "^15.1.0"
+	},
+	"devDependencies": {
+		"@rollup/plugin-commonjs": "^11.0.2",
+		"@rollup/plugin-json": "^4.0.2",
+		"@rollup/plugin-node-resolve": "^7.1.1",
+		"@rollup/plugin-url": "^4.0.2",
+		"@svgr/rollup": "^5.2.0",
+		"rollup": "^1.32.0",
+		"rollup-plugin-peer-deps-external": "^2.2.2",
+		"rollup-plugin-preserve-shebangs": "^0.1.2",
+		"rollup-plugin-terser": "^5.2.0"
 	}
 }
