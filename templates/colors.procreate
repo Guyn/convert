@@ -1,5 +1,5 @@
 {
-  "name" :  <%= settings.title %>,
+  "name" : "<%= settings.title %>",
   "swatches" : [
     <% var i=0; Object.keys(colors).forEach(function(color){ i++; %>
     {
