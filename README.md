@@ -1,4 +1,4 @@
-# GUYNER
+# @Guyn/convert
 
 A color convert to different formats. Format your JSON based source file to any file you want.
 
@@ -7,7 +7,7 @@ A color convert to different formats. Format your JSON based source file to any 
 Installation isn't necessary, the script can be used through `npx`.
 
 ```bash
-npx guyner --src mySourceFile.json --dest /temp --type scss
+npx @guyn/convert --src mySourceFile.json --dest /temp --type scss
 ```
 
 But if you really want it in your project, you can install it using npm;
@@ -34,10 +34,11 @@ yarn add guyner
 | `--prefix`   | ×                                 | `boolean`                                   | A prefix will be used within the fixes to prefix variables or objects                                                                                                                             |
 | `--combine`  | ×                                 | `boolean`                                   | When given multiple sources, they can be combined into one output file                                                                                                                            |
 | `--filename` | ×                                 | `string`                                    | You can give an altername output name for your file. They will use they extension of your template. When given multiple destinations (not combined) you need to give the same amount of filenames |
+| `--title`    | ×                                 | `string`                                    | The Set name used in the procreate file. For now this is only need when you generate Procreate swatches                                                                                           |
 
 ### Usage
 
-Guyner can be used as a `npx` script or as a node_module in your package. The easiest way is to install it and use it in a script in your package.json like;
+@guyn/convert can be used as a `npx` script or as a node_module in your package. The easiest way is to install it and use it in a script in your package.json like;
 
 ```json
 // package.json
