@@ -92,6 +92,42 @@ Example of the css template;
 
 ```
 
+### Procreate Swatches
+
+Convert can also create Procreate swatch files in the same matter as it does any other files. For this you will need to add a title and make sure you set a output file;
+
+#### In package json script;
+
+_package.json_
+
+```
+...
+	"build:procreate": "guyn@convert --src src/yourfile.json --dest dist/Yourfile.swatches --title Yourfile --type procreate
+...
+```
+
+#### In a shell file;
+
+Or on a bash file (procreate.sh);
+
+_package.json_
+
+```
+...
+	"build:procreate": "node scripts/procreate.sh"
+...
+```
+
+_scripts/procreate.sh_
+
+```
+node node_modules/guyn/convert/dist/cli.js \
+    --src test/source/valid/source1.json \
+    --dest tmp/01-procreate/Test.swatches \
+    --title GuynTest \
+    --type procreate \
+```
+
 ## Wishlist
 
 - Add support for rgba, hsla and 3 digix colors.
