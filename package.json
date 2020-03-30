@@ -1,6 +1,6 @@
 {
 	"name": "@guyn/convert",
-	"version": "1.3.3",
+	"version": "1.4.0",
 	"description": "Convert Colors into multiple files",
 	"main": "cli.js",
 	"bin": {
