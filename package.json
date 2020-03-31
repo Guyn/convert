@@ -7,7 +7,7 @@
 		"convert": "dist/cli.js"
 	},
 	"scripts": {
-		"test": "npm run test:success && npm run test:errors",
+		"test": "jest --verbose && npm run test:success && npm run test:errors",
 		"test:success": "sh test/test.sh",
 		"test:errors": "sh test/errors.sh",
 		"test:procreate": "sh test/procreate.sh",
@@ -45,6 +45,7 @@
 		"@rollup/plugin-node-resolve": "^7.1.1",
 		"@rollup/plugin-url": "^4.0.2",
 		"@svgr/rollup": "^5.2.0",
+		"jest": "^25.2.4",
 		"rollup": "^1.32.0",
 		"rollup-plugin-peer-deps-external": "^2.2.2",
 		"rollup-plugin-preserve-shebangs": "^0.1.2",
