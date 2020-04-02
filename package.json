@@ -7,12 +7,13 @@
 		"convert": "dist/cli.js"
 	},
 	"scripts": {
-		"test": "jest --verbose && npm run test:success && npm run test:errors",
-		"test:success": "sh test/test.sh",
-		"test:errors": "sh test/errors.sh",
-		"test:procreate": "sh test/procreate.sh",
+		"test": "npm run build && jest --verbose && npm run test:success && npm run test:procreate",
+		"test:success": "npm run build && sh test/test.sh",
+		"test:errors": "npm run build && sh test/errors.sh",
+		"test:procreate": "npm run build && sh test/procreate.sh",
 		"test:npx": "npx guyner --src test/source/valid/sourc1.json --dest tmp/npx-test --template scss",
-		"build": "rollup -c"
+		"build": "tsc",
+		"build:package": "npm run build && rollup -c"
 	},
 	"repository": {
 		"type": "git",
@@ -45,11 +46,15 @@
 		"@rollup/plugin-node-resolve": "^7.1.1",
 		"@rollup/plugin-url": "^4.0.2",
 		"@svgr/rollup": "^5.2.0",
+		"@types/jest": "^25.1.4",
 		"jest": "^25.2.4",
 		"rollup": "^1.32.0",
 		"rollup-plugin-peer-deps-external": "^2.2.2",
 		"rollup-plugin-preserve-shebangs": "^0.1.2",
-		"rollup-plugin-terser": "^5.2.0"
+		"rollup-plugin-terser": "^5.2.0",
+		"ts-jest": "^25.3.0",
+		"tslint": "^6.1.1",
+		"typescript": "^3.8.3"
 	},
 	"directories": {
 		"lib": "lib",
