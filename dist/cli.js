@@ -1,16 +1,15 @@
 #!/usr/bin/env node
-"use strict";
-const steps = require("./lib/steps");
-steps
-    .START()
-    .then(steps.SETTINGS)
-    .then(steps.SOURCE)
-    .then(steps.FOLDERS)
-    .then(steps.CONVERT)
-    .then(steps.TEMPLATES)
-    .then(steps.BUILD)
-    .then(steps.WRITE)
-    .then(
-// console.log(res);
-steps.FINISH);
+'use strict';
+Object.defineProperty(exports, '__esModule', { value: true });
+const lib_1 = require('./lib');
+lib_1
+	.START()
+	.then(lib_1.SETTINGS)
+	.then(lib_1.SOURCE)
+	.then(lib_1.FOLDERS)
+	.then(lib_1.CONVERT)
+	.then(lib_1.TEMPLATES)
+	.then(lib_1.BUILD)
+	.then(lib_1.WRITE)
+	.then(lib_1.FINISH);
 //# sourceMappingURL=cli.js.map

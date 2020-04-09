@@ -20,8 +20,10 @@ const path_1 = require("path");
 const jszip_1 = __importDefault(require("jszip"));
 const WRITE_PROCREATE_FILES = (data, set) => __awaiter(void 0, void 0, void 0, function* () {
     const zip = new jszip_1.default();
-    zip.file("Swatches.json", set.data);
-    yield zip.generateAsync({ type: "nodebuffer" }).then(function (content) {
+    zip.file('Swatches.json', set.data);
+    yield zip
+        .generateAsync({ type: 'nodebuffer' })
+        .then(function (content) {
         return __awaiter(this, void 0, void 0, function* () {
             yield fs_1.promises
                 .writeFile(set.path, content)
@@ -30,7 +32,7 @@ const WRITE_PROCREATE_FILES = (data, set) => __awaiter(void 0, void 0, void 0, f
                 return Object.assign(Object.assign({}, data), { error: [err] });
             });
             yield fs_1.promises
-                .writeFile(path_1.join(utils_1.pathOnly(set.path), "Swatches.json"), set.data)
+                .writeFile(path_1.join(utils_1.pathOnly(set.path), 'Swatches.json'), set.data)
                 .finally(() => data)
                 .catch((err) => {
                 return Object.assign(Object.assign({}, data), { error: [err] });
@@ -42,7 +44,7 @@ const WRITE_PROCREATE_FILES = (data, set) => __awaiter(void 0, void 0, void 0, f
 const WRITE_FILES = (data) => __awaiter(void 0, void 0, void 0, function* () {
     yield utils_1.asyncForEach(data.files, (set) => __awaiter(void 0, void 0, void 0, function* () {
         // When it's a procreate file, it needs to be converted Swatches.json and zipped.
-        if (set.ext == ".swatches")
+        if (set.ext == '.swatches')
             WRITE_PROCREATE_FILES(data, set);
         else {
             yield fs_1.promises
@@ -57,9 +59,9 @@ const WRITE_FILES = (data) => __awaiter(void 0, void 0, void 0, function* () {
 });
 const LOG_WRITE = (data) => {
     if (data.files.length > 1)
-        cli_block_1.default.BLOCK_MID("Writing files");
+        cli_block_1.default.BLOCK_MID('Writing files');
     else
-        cli_block_1.default.BLOCK_MID("Writing file");
+        cli_block_1.default.BLOCK_MID('Writing file');
     data.files.forEach((file) => {
         cli_block_1.default.BLOCK_LINE_SUCCESS(`${file.name} ${kleur_1.blue().italic(file.path)}`);
     });

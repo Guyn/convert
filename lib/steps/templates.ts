@@ -1,6 +1,6 @@
-import { promises as fs } from "fs";
-import path from "path";
-import log from "cli-block";
+import { promises as fs } from 'fs';
+import path from 'path';
+import log from 'cli-block';
 
 const GET_EXT_TEMPLATES = (data: any) => {
 	// If its internal or an external directory, just go on.
@@ -9,7 +9,7 @@ const GET_EXT_TEMPLATES = (data: any) => {
 	let templates = [];
 
 	let templateFiles =
-		typeof data.settings.template == "string"
+		typeof data.settings.template == 'string'
 			? [data.settings.template]
 			: data.settings.template;
 
@@ -35,18 +35,18 @@ const GET_INT_TEMPLATES = async (data: any) => {
 	return {
 		...data,
 		templates: await fs
-			.readdir(path.join(__dirname, "../../templates"))
+			.readdir(path.join(__dirname, '../../../templates'))
 			.then((result) => {
 				return result
 					.filter((template) => {
 						// Filter out any value which is not the template.
-						return types.includes(path.extname(template).replace(".", ""));
+						return types.includes(path.extname(template).replace('.', ''));
 					})
 					.map((file) => {
 						return {
 							name: path.basename(file),
 							file: file,
-							path: path.join(__dirname, "../../templates", file)
+							path: path.join(__dirname, '../../../templates', file)
 						};
 					});
 			})
@@ -78,8 +78,8 @@ const GET_TEMPLATE_FILES = async (data: any) => {
 };
 
 const LOG_TEMPLATE_FILES = (data: any) => {
-	if (data.templates.length > 1) log.BLOCK_MID("Template files");
-	else log.BLOCK_MID("Template file");
+	if (data.templates.length > 1) log.BLOCK_MID('Template files');
+	else log.BLOCK_MID('Template file');
 
 	data.templates.forEach((file) => {
 		log.BLOCK_LINE(file.name);

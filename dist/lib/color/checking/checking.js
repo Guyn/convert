@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const { between } = require("../../utils");
-const { hexType, rgbType, hslType } = require("../../types");
+const { between } = require('../../utils');
+const { hexType, rgbType, hslType } = require('../../types');
 exports.isHex = (hex) => {
     return /^#[0-9A-F]{6}$/i.test(hex);
 };

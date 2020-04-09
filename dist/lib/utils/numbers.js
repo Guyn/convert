@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.isPercentage = (n) => {
-    return typeof n === "string" && n.indexOf("%") != -1;
+    return typeof n === 'string' && n.indexOf('%') != -1;
 };
 exports.bound = (n, max) => {
     n = Math.min(max, Math.max(0, n));

@@ -1,4 +1,4 @@
-const path = require("path");
+const path = require('path');
 
 export const asyncForEach = async (array: any, callback: any) => {
 	for (let index = 0; index < array.length; index++) {
@@ -9,17 +9,17 @@ export const asyncForEach = async (array: any, callback: any) => {
 export const WAIT = async () => {
 	return new Promise((resolve) => {
 		setTimeout(() => {
-			resolve("resolved");
+			resolve('resolved');
 		}, 0);
 	});
 };
 
 export const pathOnly = (string: string) => {
 	let destDir = string;
-	const destArray = string.split("/");
-	if (destArray[destArray.length - 1].includes(".")) {
+	const destArray = string.split('/');
+	if (destArray[destArray.length - 1].includes('.')) {
 		destArray.pop();
-		destDir = destArray.join("/");
+		destDir = destArray.join('/');
 	}
 	return destDir;
 };
@@ -29,5 +29,5 @@ export const isDir = (dir: string) => {
 };
 
 export const getExt = (file: string) => {
-	return path.extname(file.replace(".template", ""));
+	return path.extname(file.replace('.template', ''));
 };

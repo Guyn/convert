@@ -1,17 +1,23 @@
 #!/usr/bin/env node
-"use strict";
 
-const steps = require("./lib/steps");
-steps
-	.START()
-	.then(steps.SETTINGS)
-	.then(steps.SOURCE)
-	.then(steps.FOLDERS)
-	.then(steps.CONVERT)
-	.then(steps.TEMPLATES)
-	.then(steps.BUILD)
-	.then(steps.WRITE)
-	.then(
-		// console.log(res);
-		steps.FINISH
-	);
+import {
+	START,
+	SETTINGS,
+	SOURCE,
+	FOLDERS,
+	CONVERT,
+	TEMPLATES,
+	BUILD,
+	WRITE,
+	FINISH
+} from './lib';
+
+START()
+	.then(SETTINGS)
+	.then(SOURCE)
+	.then(FOLDERS)
+	.then(CONVERT)
+	.then(TEMPLATES)
+	.then(BUILD)
+	.then(WRITE)
+	.then(FINISH);

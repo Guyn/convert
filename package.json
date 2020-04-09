@@ -2,7 +2,9 @@
 	"name": "@guyn/convert",
 	"version": "1.4.6",
 	"description": "Convert Colors into multiple files",
-	"main": "cli.js",
+	"main": "dist/cli.js",
+	"module": "dist/cli.module.js",
+	"browser": "dist/cli.browser.js",
 	"bin": {
 		"convert": "dist/cli.js"
 	},
@@ -12,12 +14,14 @@
 		"test:errors": "npm run build && sh test/errors.sh",
 		"test:procreate": "npm run build && sh test/procreate.sh",
 		"test:npx": "npx guyner --src test/source/valid/sourc1.json --dest tmp/npx-test --template scss",
+		"lint": "eslint --ext .js,.ts --ignore-path .gitignore .",
+		"lint:fix": "eslint --ext .js,.ts --ignore-path .gitignore . --fix",
 		"build": "tsc",
-		"build:package": "npm run build && rollup -c"
+		"build:dev": "tsc"
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+ssh://git@github.com/silvandiepen/guyner.git"
+		"url": "git+ssh://git@github.com/guyn/convert.git"
 	},
 	"keywords": [
 		"Convert",
@@ -27,12 +31,12 @@
 	"author": "Sil van Diepen",
 	"license": "MIT",
 	"bugs": {
-		"url": "https://github.com/silvandiepen/guyner/issues"
+		"url": "https://github.com/guyn/convert/issues"
 	},
-	"homepage": "https://github.com/silvandiepen/guyner#readme",
+	"homepage": "https://github.com/guyn/convert#readme",
 	"dependencies": {
 		"ansi-256-colors": "^1.1.0",
-		"cli-block": "^1.1.2",
+		"cli-block": "^1.1.4",
 		"ejs": "^3.0.1",
 		"jszip": "^3.2.2",
 		"kleur": "^3.0.3",
@@ -41,17 +45,15 @@
 		"yargs": "^15.1.0"
 	},
 	"devDependencies": {
-		"@rollup/plugin-commonjs": "^11.0.2",
-		"@rollup/plugin-json": "^4.0.2",
-		"@rollup/plugin-node-resolve": "^7.1.1",
-		"@rollup/plugin-url": "^4.0.2",
-		"@svgr/rollup": "^5.2.0",
 		"@types/jest": "^25.1.4",
+		"@typescript-eslint/eslint-plugin": "^2.26.0",
+		"@typescript-eslint/parser": "^2.26.0",
+		"eslint": "^6.8.0",
+		"eslint-config-prettier": "^6.10.1",
+		"eslint-plugin-import": "^2.20.2",
+		"eslint-plugin-prettier": "^3.1.2",
 		"jest": "^25.2.4",
-		"rollup": "^1.32.0",
-		"rollup-plugin-peer-deps-external": "^2.2.2",
-		"rollup-plugin-preserve-shebangs": "^0.1.2",
-		"rollup-plugin-terser": "^5.2.0",
+		"prettier": "^2.0.3",
 		"ts-jest": "^25.3.0",
 		"tslint": "^6.1.1",
 		"typescript": "^3.8.3"

@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const { bound } = require("../../utils");
-const { hexType, rgbType, hslType } = require("../../types");
+const { bound } = require('../../utils');
+const { hexType, rgbType, hslType } = require('../../types');
 exports.hexToRgb = (hex) => {
     const regex = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return regex
@@ -103,10 +103,14 @@ exports.hslToRgb = (hsl) => {
 exports.hslToHex = (hsl) => {
     let rgb = exports.hslToRgb(hsl);
     return rgb && Object.keys(rgb).length === 3
-        ? "#" +
-            ("0" + parseInt(rgb.r, 10).toString(16)).slice(-2) +
-            ("0" + parseInt(rgb.g, 10).toString(16)).slice(-2) +
-            ("0" + parseInt(rgb.b, 10).toString(16)).slice(-2)
-        : "";
+        ? '#' +
+            ('0' + parseInt(rgb.r, 10).toString(16)).slice(-2) +
+            ('0' + parseInt(rgb.g, 10).toString(16)).slice(-2) +
+            ('0' + parseInt(rgb.b, 10).toString(16)).slice(-2)
+        : '';
+};
+exports.rgbToHex = (rgb) => {
+    let hsl = exports.rgbToHsl(rgb);
+    return exports.hslToHex(hsl);
 };
 //# sourceMappingURL=convert.js.map

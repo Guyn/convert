@@ -5,8 +5,8 @@ import {
 	percentageScaleType
 } from "./numbers";
 
-export type hexType = string & { __hexType: true };
-export const isHex = (x: string): x is hexType => {
+export type hexType = string & { __isHexCode: true };
+export const isHexCode = (x: string): x is hexType => {
 	const re = /#[0-9a-fA-F]{3}([0-9a-fA-F]{3})?/g;
 	return re.test(x);
 };

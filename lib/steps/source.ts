@@ -1,7 +1,7 @@
-import { promises as fs } from "fs";
-import path from "path";
-import log from "cli-block";
-import { asyncForEach } from "../utils";
+import { promises as fs } from 'fs';
+import path from 'path';
+import log from 'cli-block';
+import { asyncForEach } from '../utils';
 
 const GET_SOURCE_FILES = async (data: any) => {
 	if (!data.settings.source) return { ...data };
@@ -24,7 +24,7 @@ const GET_SOURCE_FILES = async (data: any) => {
 	await asyncForEach(srcFiles, async (file) => {
 		const fileData = await fs.readFile(file).then((res) => res.toString());
 		files.push({
-			name: path.basename(file).replace(path.extname(file), ""),
+			name: path.basename(file).replace(path.extname(file), ''),
 			file: path.basename(file),
 			type: path.extname(path.basename(file)),
 			path: source,
@@ -39,7 +39,7 @@ const GET_SOURCE_FILES = async (data: any) => {
 const FILTER_FILES = (data: any) => {
 	return {
 		...data,
-		source: data.source.filter((file) => file.type == ".json")
+		source: data.source.filter((file) => file.type == '.json')
 	};
 };
 

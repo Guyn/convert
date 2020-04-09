@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const path = require("path");
+const path = require('path');
 exports.asyncForEach = (array, callback) => __awaiter(void 0, void 0, void 0, function* () {
     for (let index = 0; index < array.length; index++) {
         yield callback(array[index], index, array);
@@ -18,16 +18,16 @@ exports.asyncForEach = (array, callback) => __awaiter(void 0, void 0, void 0, fu
 exports.WAIT = () => __awaiter(void 0, void 0, void 0, function* () {
     return new Promise((resolve) => {
         setTimeout(() => {
-            resolve("resolved");
+            resolve('resolved');
         }, 0);
     });
 });
 exports.pathOnly = (string) => {
     let destDir = string;
-    const destArray = string.split("/");
-    if (destArray[destArray.length - 1].includes(".")) {
+    const destArray = string.split('/');
+    if (destArray[destArray.length - 1].includes('.')) {
         destArray.pop();
-        destDir = destArray.join("/");
+        destDir = destArray.join('/');
     }
     return destDir;
 };
@@ -35,6 +35,6 @@ exports.isDir = (dir) => {
     return path.extname(path.basename(dir)) ? false : true;
 };
 exports.getExt = (file) => {
-    return path.extname(file.replace(".template", ""));
+    return path.extname(file.replace('.template', ''));
 };
 //# sourceMappingURL=misc.js.map

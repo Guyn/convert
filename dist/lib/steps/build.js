@@ -14,34 +14,33 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const path_1 = __importDefault(require("path"));
 const ejs_1 = __importDefault(require("ejs"));
-const utils_1 = require("../utils");
 const cli_block_1 = __importDefault(require("cli-block"));
+const utils_1 = require("../utils");
 const BUILD_CHECK_FILENAMES = (data) => __awaiter(void 0, void 0, void 0, function* () {
     yield utils_1.WAIT();
     const error = [];
     if (!data.settings.filename)
         return data;
     if (data.settings.filename.length < 2) {
-        let filenames = [];
+        const filenames = [];
         if (data.dataSets.length > 1) {
             let i = 0;
             data.dataSets.forEach((set) => {
                 i++;
-                filenames.push(data.settings.filename + `-${i}`);
+                filenames.push(`${data.settings.filename}-${i}`);
             });
             data.settings.filename = filenames;
         }
     }
-    else {
-        if (data.settings.filename.length !== data.dataSets.length)
-            if (data.settings.filename.length > data.dataSets.length) {
-                error.push("You have more filenames, than source files");
-            }
-            else {
-                error.push("You have more sourcefiles, than filenames");
-            }
+    else if (data.settings.filename.length !== data.dataSets.length) {
+        if (data.settings.filename.length > data.dataSets.length) {
+            error.push('You have more filenames, than source files');
+        }
+        else {
+            error.push('You have more sourcefiles, than filenames');
+        }
     }
-    return Object.assign(Object.assign({}, data), { error: error });
+    return Object.assign(Object.assign({}, data), { error });
 });
 const BUILD_LOG_ERRORS = (data) => {
     if (data.error)
@@ -51,27 +50,29 @@ const BUILD_LOG_ERRORS = (data) => {
     return data;
 };
 const BUILD_FILES = (data) => __awaiter(void 0, void 0, void 0, function* () {
-    let files = [];
+    const files = [];
     yield utils_1.asyncForEach(data.templates, (template) => __awaiter(void 0, void 0, void 0, function* () {
         let i = 0;
         yield utils_1.asyncForEach(data.dataSets, (set) => {
             const settingDestination = data.settings.destination;
-            let fileName, filePath, dirPath, extension;
+            let fileName;
+            let dirPath;
             if (utils_1.isDir(settingDestination)) {
                 dirPath = settingDestination;
                 fileName = set.name + utils_1.getExt(template.name);
             }
             else {
-                dirPath = settingDestination.replace(path_1.default.basename(settingDestination), "");
+                dirPath = settingDestination.replace(path_1.default.basename(settingDestination), '');
                 fileName = path_1.default.basename(settingDestination);
             }
             // Get the extension
-            extension = utils_1.getExt(fileName);
+            const extension = utils_1.getExt(fileName);
             // When there are filenames defined by settings
-            if (data.settings.filename)
+            if (data.settings.filename) {
                 fileName = data.settings.filename[i] + extension;
+            }
             // fileName = fileName.replace(".template", "");
-            filePath = path_1.default.join(dirPath, fileName);
+            const filePath = path_1.default.join(dirPath, fileName);
             files.push({
                 name: fileName,
                 ext: extension,
@@ -85,7 +86,7 @@ const BUILD_FILES = (data) => __awaiter(void 0, void 0, void 0, function* () {
             i++;
         });
     }));
-    return Object.assign(Object.assign({}, data), { files: files });
+    return Object.assign(Object.assign({}, data), { files });
 });
 exports.BUILD = (data) => __awaiter(void 0, void 0, void 0, function* () {
     return BUILD_CHECK_FILENAMES(data)

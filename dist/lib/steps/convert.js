@@ -12,13 +12,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const color_1 = require("../color");
-const utils_1 = require("../utils");
 const kleur_1 = require("kleur");
 const cli_block_1 = __importDefault(require("cli-block"));
+const color_1 = require("../color");
+const utils_1 = require("../utils");
 const CONVERT_COLORDATA = (data) => __awaiter(void 0, void 0, void 0, function* () {
     yield utils_1.WAIT();
-    let dataSets = [];
+    const dataSets = [];
     data.source.forEach((file) => {
         const colorData = [];
         Object.keys(file.parsed).forEach((color) => {
@@ -35,22 +35,22 @@ const CONVERT_COLORDATA = (data) => __awaiter(void 0, void 0, void 0, function* 
             colors: colorData
         });
     });
-    return Object.assign(Object.assign({}, data), { dataSets: dataSets });
+    return Object.assign(Object.assign({}, data), { dataSets });
 });
 const LOG_CONVERTS = (data) => {
     if (data.source.length > 1)
-        cli_block_1.default.BLOCK_MID("Source Files");
+        cli_block_1.default.BLOCK_MID('Source Files');
     else
-        cli_block_1.default.BLOCK_MID("Source File");
+        cli_block_1.default.BLOCK_MID('Source File');
     data.dataSets.forEach((file) => {
         cli_block_1.default.BLOCK_LINE(`${kleur_1.yellow().bold(file.name.toUpperCase())}`);
         cli_block_1.default.BLOCK_LINE();
         // LOG.LINE(`${LOG.repeat("-", 100)}`);
         cli_block_1.default.BLOCK_ROW_LINE([
-            `${kleur_1.bold("name")}`,
-            `${kleur_1.bold("hex")}`,
-            `${kleur_1.bold("hsl")}`,
-            `${kleur_1.bold("rgb")}`
+            `${kleur_1.bold('name')}`,
+            `${kleur_1.bold('hex')}`,
+            `${kleur_1.bold('hsl')}`,
+            `${kleur_1.bold('rgb')}`
         ]);
         cli_block_1.default.BLOCK_LINE();
         // console.log(LOG, LOG.spacedText(20, "hoi"));
@@ -69,7 +69,7 @@ const COMBINE_IF_SET = (data) => {
     if (!data.settings.combine)
         return data;
     // const setName = data.dataSets[0].name;
-    let combinedSet = data.dataSets[0];
+    const combinedSet = data.dataSets[0];
     for (let i = 1; i < data.dataSets.length; i++) {
         combinedSet.colors = [...combinedSet.colors, ...data.dataSets[i].colors];
     }

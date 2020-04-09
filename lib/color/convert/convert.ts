@@ -1,5 +1,5 @@
-const { bound } = require("../../utils");
-const { hexType, rgbType, hslType } = require("../../types");
+const { bound } = require('../../utils');
+const { hexType, rgbType, hslType } = require('../../types');
 
 export const hexToRgb = (hex: typeof hexType): typeof rgbType => {
 	const regex = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
@@ -113,9 +113,14 @@ export const hslToRgb = (hsl: typeof hslType): typeof rgbType => {
 export const hslToHex = (hsl: typeof hslType): typeof hexType => {
 	let rgb = hslToRgb(hsl);
 	return rgb && Object.keys(rgb).length === 3
-		? "#" +
-				("0" + parseInt(rgb.r, 10).toString(16)).slice(-2) +
-				("0" + parseInt(rgb.g, 10).toString(16)).slice(-2) +
-				("0" + parseInt(rgb.b, 10).toString(16)).slice(-2)
-		: "";
+		? '#' +
+				('0' + parseInt(rgb.r, 10).toString(16)).slice(-2) +
+				('0' + parseInt(rgb.g, 10).toString(16)).slice(-2) +
+				('0' + parseInt(rgb.b, 10).toString(16)).slice(-2)
+		: '';
+};
+
+export const rgbToHex = (rgb: typeof rgbType): typeof hexType => {
+	let hsl = rgbToHsl(rgb);
+	return hslToHex(hsl);
 };

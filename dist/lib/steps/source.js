@@ -33,7 +33,7 @@ const GET_SOURCE_FILES = (data) => __awaiter(void 0, void 0, void 0, function* (
     yield utils_1.asyncForEach(srcFiles, (file) => __awaiter(void 0, void 0, void 0, function* () {
         const fileData = yield fs_1.promises.readFile(file).then((res) => res.toString());
         files.push({
-            name: path_1.default.basename(file).replace(path_1.default.extname(file), ""),
+            name: path_1.default.basename(file).replace(path_1.default.extname(file), ''),
             file: path_1.default.basename(file),
             type: path_1.default.extname(path_1.default.basename(file)),
             path: source,
@@ -44,7 +44,7 @@ const GET_SOURCE_FILES = (data) => __awaiter(void 0, void 0, void 0, function* (
     return Object.assign(Object.assign({}, data), { source: files });
 });
 const FILTER_FILES = (data) => {
-    return Object.assign(Object.assign({}, data), { source: data.source.filter((file) => file.type == ".json") });
+    return Object.assign(Object.assign({}, data), { source: data.source.filter((file) => file.type == '.json') });
 };
 const LOG_SOURCE_FILES = (data) => {
     if (data.error)

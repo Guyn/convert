@@ -1,11 +1,11 @@
-import { hexToRgb, hexToHsl } from "../color";
-import { WAIT } from "../utils";
-import { bold, yellow } from "kleur";
-import log from "cli-block";
+import { bold, yellow } from 'kleur';
+import log from 'cli-block';
+import { hexToRgb, hexToHsl } from '../color';
+import { WAIT } from '../utils';
 
 const CONVERT_COLORDATA = async (data) => {
 	await WAIT();
-	let dataSets = [];
+	const dataSets = [];
 
 	data.source.forEach((file) => {
 		const colorData = [];
@@ -25,22 +25,22 @@ const CONVERT_COLORDATA = async (data) => {
 		});
 	});
 
-	return { ...data, dataSets: dataSets };
+	return { ...data, dataSets };
 };
 
 const LOG_CONVERTS = (data) => {
-	if (data.source.length > 1) log.BLOCK_MID("Source Files");
-	else log.BLOCK_MID("Source File");
+	if (data.source.length > 1) log.BLOCK_MID('Source Files');
+	else log.BLOCK_MID('Source File');
 
 	data.dataSets.forEach((file) => {
 		log.BLOCK_LINE(`${yellow().bold(file.name.toUpperCase())}`);
 		log.BLOCK_LINE();
 		// LOG.LINE(`${LOG.repeat("-", 100)}`);
 		log.BLOCK_ROW_LINE([
-			`${bold("name")}`,
-			`${bold("hex")}`,
-			`${bold("hsl")}`,
-			`${bold("rgb")}`
+			`${bold('name')}`,
+			`${bold('hex')}`,
+			`${bold('hsl')}`,
+			`${bold('rgb')}`
 		]);
 		log.BLOCK_LINE();
 
@@ -61,7 +61,7 @@ const COMBINE_IF_SET = (data) => {
 	if (!data.settings.combine) return data;
 
 	// const setName = data.dataSets[0].name;
-	let combinedSet = data.dataSets[0];
+	const combinedSet = data.dataSets[0];
 	for (let i = 1; i < data.dataSets.length; i++) {
 		combinedSet.colors = [...combinedSet.colors, ...data.dataSets[i].colors];
 	}

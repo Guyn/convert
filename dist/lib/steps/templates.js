@@ -20,7 +20,7 @@ const GET_EXT_TEMPLATES = (data) => {
     if (!data.settings.template)
         return data;
     let templates = [];
-    let templateFiles = typeof data.settings.template == "string"
+    let templateFiles = typeof data.settings.template == 'string'
         ? [data.settings.template]
         : data.settings.template;
     templateFiles.forEach((file) => {
@@ -39,18 +39,18 @@ const GET_INT_TEMPLATES = (data) => __awaiter(void 0, void 0, void 0, function* 
     // Process Internal templates
     let types = data.settings.ext;
     return Object.assign(Object.assign({}, data), { templates: yield fs_1.promises
-            .readdir(path_1.default.join(__dirname, "../../templates"))
+            .readdir(path_1.default.join(__dirname, '../../../templates'))
             .then((result) => {
             return result
                 .filter((template) => {
                 // Filter out any value which is not the template.
-                return types.includes(path_1.default.extname(template).replace(".", ""));
+                return types.includes(path_1.default.extname(template).replace('.', ''));
             })
                 .map((file) => {
                 return {
                     name: path_1.default.basename(file),
                     file: file,
-                    path: path_1.default.join(__dirname, "../../templates", file)
+                    path: path_1.default.join(__dirname, '../../../templates', file)
                 };
             });
         }) });
@@ -75,9 +75,9 @@ const GET_TEMPLATE_FILES = (data) => __awaiter(void 0, void 0, void 0, function*
 });
 const LOG_TEMPLATE_FILES = (data) => {
     if (data.templates.length > 1)
-        cli_block_1.default.BLOCK_MID("Template files");
+        cli_block_1.default.BLOCK_MID('Template files');
     else
-        cli_block_1.default.BLOCK_MID("Template file");
+        cli_block_1.default.BLOCK_MID('Template file');
     data.templates.forEach((file) => {
         cli_block_1.default.BLOCK_LINE(file.name);
     });

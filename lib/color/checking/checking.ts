@@ -1,5 +1,5 @@
-const { between } = require("../../utils");
-const { hexType, rgbType, hslType } = require("../../types");
+const { between } = require('../../utils');
+const { hexType, rgbType, hslType } = require('../../types');
 
 export const isHex = (hex: typeof hexType): boolean => {
 	return /^#[0-9A-F]{6}$/i.test(hex);

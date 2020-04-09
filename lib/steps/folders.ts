@@ -1,5 +1,5 @@
-import { pathOnly } from "../utils";
-import { promises as fs } from "fs";
+import { promises as fs } from 'fs';
+import { pathOnly } from '../utils';
 
 export const FOLDERS = async (data: any) => {
 	const destDir = pathOnly(data.settings.destination);

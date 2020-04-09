@@ -9,8 +9,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const utils_1 = require("../utils");
 const fs_1 = require("fs");
+const utils_1 = require("../utils");
 exports.FOLDERS = (data) => __awaiter(void 0, void 0, void 0, function* () {
     const destDir = utils_1.pathOnly(data.settings.destination);
     try {
