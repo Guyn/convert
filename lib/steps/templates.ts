@@ -1,6 +1,6 @@
 import { promises as fs } from 'fs';
 import path from 'path';
-import log from 'cli-block';
+import * as log from 'cli-block';
 
 const GET_EXT_TEMPLATES = (data: any) => {
 	// If its internal or an external directory, just go on.

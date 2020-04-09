@@ -1,6 +1,6 @@
 import { promises as fs } from 'fs';
 import path from 'path';
-import log from 'cli-block';
+import * as log from 'cli-block';
 import { asyncForEach } from '../utils';
 
 const GET_SOURCE_FILES = async (data: any) => {

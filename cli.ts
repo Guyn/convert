@@ -12,6 +12,7 @@ import {
 	FINISH
 } from './lib';
 
+console.log(START);
 START()
 	.then(SETTINGS)
 	.then(SOURCE)

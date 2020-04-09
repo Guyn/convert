@@ -1,6 +1,6 @@
 import path from 'path';
 import ejs from 'ejs';
-import log from 'cli-block';
+import * as log from 'cli-block';
 import { asyncForEach, WAIT, isDir, getExt, helpers } from '../utils';
 
 const BUILD_CHECK_FILENAMES = async (data: any) => {

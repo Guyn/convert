@@ -11,12 +11,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const path_1 = __importDefault(require("path"));
 const fs_1 = require("fs");
 const yargs_1 = __importDefault(require("yargs"));
 const utils_1 = require("../utils");
-const cli_block_1 = __importDefault(require("cli-block"));
+const log = __importStar(require("cli-block"));
 const argv = yargs_1.default.options({
     title: { type: 'string', default: null },
     src: { type: 'string', default: null },
@@ -95,12 +102,12 @@ const GET_SETTINGS = () => __awaiter(void 0, void 0, void 0, function* () {
     return { settings };
 });
 const LOG_SETTINGS = (data) => __awaiter(void 0, void 0, void 0, function* () {
-    cli_block_1.default.BLOCK_START('Settings');
-    cli_block_1.default.BLOCK_SETTINGS(data.settings);
+    log.BLOCK_START('Settings');
+    log.BLOCK_SETTINGS(data.settings);
     if (data.error)
-        cli_block_1.default.BLOCK_ERRORS(data.error);
+        log.BLOCK_ERRORS(data.error);
     if (data.warning)
-        cli_block_1.default.BLOCK_WARNINGS(data.warning);
+        log.BLOCK_WARNINGS(data.warning);
     return data;
 });
 exports.SETTINGS = () => __awaiter(void 0, void 0, void 0, function* () {

@@ -1,5 +1,5 @@
 import { asyncForEach, pathOnly } from '../utils';
-import log from 'cli-block';
+import * as log from 'cli-block';
 import { blue } from 'kleur';
 import { promises as fs } from 'fs';
 import { join } from 'path';

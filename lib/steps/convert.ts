@@ -1,5 +1,5 @@
 import { bold, yellow } from 'kleur';
-import log from 'cli-block';
+import * as log from 'cli-block';
 import { hexToRgb, hexToHsl } from '../color';
 import { WAIT } from '../utils';
 

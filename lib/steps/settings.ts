@@ -2,7 +2,7 @@ import path from 'path';
 import { promises as fs } from 'fs';
 import yargs from 'yargs';
 import { WAIT } from '../utils';
-import log from 'cli-block';
+import * as log from 'cli-block';
 
 const argv = yargs.options({
 	title: { type: 'string', default: null },

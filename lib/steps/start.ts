@@ -1,4 +1,4 @@
-import log from 'cli-block';
+import * as log from 'cli-block';
 
 import { SETTINGS } from './settings';
 import { WAIT } from '../utils';

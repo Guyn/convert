@@ -11,10 +11,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = require("fs");
 const path_1 = __importDefault(require("path"));
-const cli_block_1 = __importDefault(require("cli-block"));
+const log = __importStar(require("cli-block"));
 const GET_EXT_TEMPLATES = (data) => {
     // If its internal or an external directory, just go on.
     if (!data.settings.template)
@@ -75,17 +82,17 @@ const GET_TEMPLATE_FILES = (data) => __awaiter(void 0, void 0, void 0, function*
 });
 const LOG_TEMPLATE_FILES = (data) => {
     if (data.templates.length > 1)
-        cli_block_1.default.BLOCK_MID('Template files');
+        log.BLOCK_MID('Template files');
     else
-        cli_block_1.default.BLOCK_MID('Template file');
+        log.BLOCK_MID('Template file');
     data.templates.forEach((file) => {
-        cli_block_1.default.BLOCK_LINE(file.name);
+        log.BLOCK_LINE(file.name);
     });
-    cli_block_1.default.BLOCK_LINE();
+    log.BLOCK_LINE();
     if (data.error)
-        cli_block_1.default.BLOCK_ERRORS(data.error);
+        log.BLOCK_ERRORS(data.error);
     if (data.warning)
-        cli_block_1.default.BLOCK_WARNINGS(data.warning);
+        log.BLOCK_WARNINGS(data.warning);
     return data;
 };
 exports.TEMPLATES = (data) => __awaiter(void 0, void 0, void 0, function* () {

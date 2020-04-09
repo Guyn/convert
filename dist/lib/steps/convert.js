@@ -8,12 +8,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const kleur_1 = require("kleur");
-const cli_block_1 = __importDefault(require("cli-block"));
+const log = __importStar(require("cli-block"));
 const color_1 = require("../color");
 const utils_1 = require("../utils");
 const CONVERT_COLORDATA = (data) => __awaiter(void 0, void 0, void 0, function* () {
@@ -39,30 +43,30 @@ const CONVERT_COLORDATA = (data) => __awaiter(void 0, void 0, void 0, function* 
 });
 const LOG_CONVERTS = (data) => {
     if (data.source.length > 1)
-        cli_block_1.default.BLOCK_MID('Source Files');
+        log.BLOCK_MID('Source Files');
     else
-        cli_block_1.default.BLOCK_MID('Source File');
+        log.BLOCK_MID('Source File');
     data.dataSets.forEach((file) => {
-        cli_block_1.default.BLOCK_LINE(`${kleur_1.yellow().bold(file.name.toUpperCase())}`);
-        cli_block_1.default.BLOCK_LINE();
+        log.BLOCK_LINE(`${kleur_1.yellow().bold(file.name.toUpperCase())}`);
+        log.BLOCK_LINE();
         // LOG.LINE(`${LOG.repeat("-", 100)}`);
-        cli_block_1.default.BLOCK_ROW_LINE([
+        log.BLOCK_ROW_LINE([
             `${kleur_1.bold('name')}`,
             `${kleur_1.bold('hex')}`,
             `${kleur_1.bold('hsl')}`,
             `${kleur_1.bold('rgb')}`
         ]);
-        cli_block_1.default.BLOCK_LINE();
+        log.BLOCK_LINE();
         // console.log(LOG, LOG.spacedText(20, "hoi"));
         file.colors.forEach((color) => {
-            cli_block_1.default.BLOCK_ROW_LINE([color.name, color.hex, color.hsl, color.rgb]);
+            log.BLOCK_ROW_LINE([color.name, color.hex, color.hsl, color.rgb]);
         });
-        cli_block_1.default.BLOCK_LINE();
+        log.BLOCK_LINE();
     });
     if (data.error)
-        cli_block_1.default.BLOCK_ERRORS(data.error);
+        log.BLOCK_ERRORS(data.error);
     if (data.warning)
-        cli_block_1.default.BLOCK_WARNINGS(data.warning);
+        log.BLOCK_WARNINGS(data.warning);
     return data;
 };
 const COMBINE_IF_SET = (data) => {

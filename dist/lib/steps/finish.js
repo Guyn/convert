@@ -1,10 +1,14 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const cli_block_1 = __importDefault(require("cli-block"));
+const log = __importStar(require("cli-block"));
 exports.FINISH = () => {
-    cli_block_1.default.BLOCK_END();
+    log.BLOCK_END();
 };
 //# sourceMappingURL=finish.js.map

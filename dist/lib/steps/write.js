@@ -8,12 +8,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const utils_1 = require("../utils");
-const cli_block_1 = __importDefault(require("cli-block"));
+const log = __importStar(require("cli-block"));
 const kleur_1 = require("kleur");
 const fs_1 = require("fs");
 const path_1 = require("path");
@@ -59,16 +66,16 @@ const WRITE_FILES = (data) => __awaiter(void 0, void 0, void 0, function* () {
 });
 const LOG_WRITE = (data) => {
     if (data.files.length > 1)
-        cli_block_1.default.BLOCK_MID('Writing files');
+        log.BLOCK_MID('Writing files');
     else
-        cli_block_1.default.BLOCK_MID('Writing file');
+        log.BLOCK_MID('Writing file');
     data.files.forEach((file) => {
-        cli_block_1.default.BLOCK_LINE_SUCCESS(`${file.name} ${kleur_1.blue().italic(file.path)}`);
+        log.BLOCK_LINE_SUCCESS(`${file.name} ${kleur_1.blue().italic(file.path)}`);
     });
     if (data.error)
-        cli_block_1.default.BLOCK_ERRORS(data.error);
+        log.BLOCK_ERRORS(data.error);
     if (data.warning)
-        cli_block_1.default.BLOCK_WARNINGS(data.warning);
+        log.BLOCK_WARNINGS(data.warning);
 };
 exports.WRITE = (data) => __awaiter(void 0, void 0, void 0, function* () {
     return WRITE_FILES(data)
