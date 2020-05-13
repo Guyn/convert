@@ -3,12 +3,13 @@ import { promises as fs } from 'fs';
 import yargs from 'yargs';
 import { WAIT } from '../utils';
 import * as log from 'cli-block';
+import { DataTypes } from '../types';
 
 const argv = yargs.options({
 	title: { type: 'string', default: null },
 	src: { type: 'string', default: null },
 	dest: { type: 'string', default: null },
-	ext: { type: 'string', default: null },
+	ext: { type: 'array', default: [] },
 	template: { type: 'string', default: null },
 	combine: { type: 'boolean', default: false },
 	filename: { type: 'string', default: null },
@@ -19,11 +20,14 @@ const argv = yargs.options({
 	}
 }).argv;
 
-const AVAILABLE_OPTIONS = async (data: any) => {
-	const templates = await fs.readdir(data.settings.templatePath).then((res) => {
-		return res.map((file) => {
-			return path.extname(file.replace('.template', ''));
-		});
+interface OptionsType {
+	ext: string[];
+}
+const AVAILABLE_OPTIONS = async (data: DataTypes): Promise<OptionsType> => {
+	const templates = await fs.readdir(data.settings.templatePath);
+
+	templates.map((file) => {
+		return path.extname(file.replace('.template', ''));
 	});
 
 	return {
@@ -31,10 +35,12 @@ const AVAILABLE_OPTIONS = async (data: any) => {
 	};
 };
 
-const CHECK_SETTINGS_HAS_OUTPUTFILE = async (data: any) => {
+const CHECK_SETTINGS_HAS_OUTPUTFILE = async (
+	data: DataTypes
+): Promise<DataTypes> => {
 	const errors = [];
 
-	const ext = path.extname(path.basename(data.settings.destination));
+	const ext = path.extname(path.basename(data.settings.dest));
 	const hasOutputfile = ext ? true : false;
 
 	if (hasOutputfile) {
@@ -50,7 +56,9 @@ const CHECK_SETTINGS_HAS_OUTPUTFILE = async (data: any) => {
 	return { ...data, error: errors };
 };
 
-const CHECK_SETTINGS_HAS_TYPE_OR_TEMPLATE = (data: any) => {
+const CHECK_SETTINGS_HAS_TYPE_OR_TEMPLATE = async (
+	data: DataTypes
+): Promise<DataTypes> => {
 	const errors = [];
 
 	// If the destination doesn't include a file.
@@ -65,18 +73,7 @@ const CHECK_SETTINGS_HAS_TYPE_OR_TEMPLATE = (data: any) => {
 	return { ...data, error: errors };
 };
 
-const CONVERT_TO_ARRAY_WHERE_NECESSARY = (data: any) => {
-	// If only one
-	if (typeof data.settings.ext == 'string')
-		data.settings.ext = [data.settings.ext];
-	if (typeof data.settings.filename == 'string')
-		data.settings.filename = [data.settings.filename];
-	if (typeof data.settings.template == 'string')
-		data.settings.template = [data.settings.template];
-	return { ...data };
-};
-
-const CHECK_PROCREATE_TITLE = (data) => {
+const CHECK_PROCREATE_TITLE = (data: DataTypes) => {
 	const errors = [];
 
 	// If the destination doesn't include a file.
@@ -91,21 +88,77 @@ const CHECK_PROCREATE_TITLE = (data) => {
 	return { ...data, error: errors };
 };
 
-const GET_SETTINGS = async () => {
-	await WAIT();
-	const settings = {
-		...argv,
-		source: argv.src,
-		destination: argv.dest,
-		ext: argv.type,
-		prefix: argv.prefix ? `${argv.prefix}-` : '',
-		templatePath: argv.templatePath
-			? argv.templatePath
-			: path.join(__dirname, '../../templates')
+const GET_SETTINGS = async (): Promise<DataTypes> => {
+	await WAIT(0); // Needs an await to make it usuable as steps.
+
+	const settings = yargs.options({
+		src: {
+			require: true,
+			type: 'string',
+			default: null,
+			alias: 'source'
+		},
+		dest: {
+			require: true,
+			type: 'string',
+			default: null,
+			alias: 'destination'
+		},
+		type: {
+			required: false,
+			type: 'array',
+			alias: 'ext'
+		},
+		prefix: {
+			required: false,
+			type: 'string',
+			alias: 'prefix'
+		},
+		templatePath: {
+			required: false,
+			type: 'string',
+			default: path.join(__dirname, '../../../templates')
+		},
+		template: {
+			required: false,
+			type: 'string',
+			default: null
+		},
+		combine: {
+			required: false,
+			type: 'boolean',
+			default: false
+		},
+		filename: {
+			required: false,
+			type: 'string',
+			default: null
+		},
+		title: {
+			required: false,
+			type: 'string',
+			default: null
+		}
+	}).argv;
+
+	return {
+		settings: {
+			src: settings.src,
+			dest: settings.dest,
+			ext: settings.type,
+			prefix: settings.prefix,
+			templatePath: settings.templatePath,
+			template: settings.template,
+			filename: settings.filename,
+			combine: settings.combine,
+			title: settings.title
+		},
+		source: [],
+		error: [],
+		warning: []
 	};
-	return { settings };
 };
-const LOG_SETTINGS = async (data: any) => {
+const LOG_SETTINGS = async (data: DataTypes) => {
 	log.BLOCK_START('Settings');
 	log.BLOCK_SETTINGS(data.settings);
 	if (data.error) log.BLOCK_ERRORS(data.error);
@@ -117,7 +170,6 @@ export const SETTINGS = async () => {
 	return GET_SETTINGS()
 		.then(CHECK_SETTINGS_HAS_OUTPUTFILE)
 		.then(CHECK_SETTINGS_HAS_TYPE_OR_TEMPLATE)
-		.then(CONVERT_TO_ARRAY_WHERE_NECESSARY)
 		.then(CHECK_PROCREATE_TITLE)
 		.then(LOG_SETTINGS)
 		.then((res) => {

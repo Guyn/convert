@@ -2,12 +2,12 @@
 // LowerCase
 // ex; MyValue > myvalue
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.lowercase = (str = '') => {
+exports.lowerCase = (str = '') => {
     return str.toLowerCase();
 };
 // PascalCase
 // ex; my value > MyValue
-exports.PascalCase = (str = '') => {
+exports.pascalCase = (str = '') => {
     if (!str)
         return '';
     return String(str)
@@ -22,7 +22,7 @@ exports.PascalCase = (str = '') => {
 exports.camelCase = (str = '') => {
     if (!str)
         return '';
-    return String(exports.PascalCase(str).charAt(0).toLowerCase() + exports.PascalCase(str).slice(1));
+    return String(exports.pascalCase(str).charAt(0).toLowerCase() + exports.pascalCase(str).slice(1));
 };
 // kebabCase
 // ex; my value > my-value
@@ -33,7 +33,7 @@ exports.kebabCase = (str = '') => str &&
         .join('-');
 // snakeCase
 // ex; my value > my_value
-exports.snake_case = (str = '') => str &&
+exports.snakeCase = (str = '') => str &&
     str
         .match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g)
         .map((x) => x.toLowerCase())
@@ -50,7 +50,7 @@ exports.toRoundNumber = (num, decimalPlaces = 0) => {
 // ex; 500px > _500px
 exports.safeVariable = (str = '') => {
     str = exports.removeSpecialCharacters(str).replace(/\s/g, '');
-    if (!isNaN(parseInt(str.charAt(0))))
+    if (!isNaN(parseInt(str.charAt(0), 0)))
         return `_${str}`;
     else
         return str;

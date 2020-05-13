@@ -2,13 +2,14 @@ import { promises as fs } from 'fs';
 import path from 'path';
 import * as log from 'cli-block';
 import { asyncForEach } from '../utils';
+import { DataTypes } from '../types';
 
-const GET_SOURCE_FILES = async (data: any) => {
-	if (!data.settings.source) return { ...data };
+const GET_SOURCE_FILES = async (data: DataTypes): Promise<DataTypes> => {
+	if (!data.settings.src) return { ...data };
 
 	let srcFiles = [];
-	let files = [];
-	let source = data.settings.source;
+	const files = [];
+	const source = data.settings.src;
 
 	// Check whether source is a file or a folder.
 	const isDir = path.extname(path.basename(source)) ? false : true;
@@ -36,10 +37,10 @@ const GET_SOURCE_FILES = async (data: any) => {
 	return { ...data, source: files };
 };
 
-const FILTER_FILES = (data: any) => {
+const FILTER_FILES = async (data: DataTypes): Promise<DataTypes> => {
 	return {
 		...data,
-		source: data.source.filter((file) => file.type == '.json')
+		source: data.source.filter((file) => file.type === '.json')
 	};
 };
 

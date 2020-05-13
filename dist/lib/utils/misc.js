@@ -8,23 +8,26 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const path = require('path');
+const path_1 = __importDefault(require("path"));
 exports.asyncForEach = (array, callback) => __awaiter(void 0, void 0, void 0, function* () {
     for (let index = 0; index < array.length; index++) {
         yield callback(array[index], index, array);
     }
 });
-exports.WAIT = () => __awaiter(void 0, void 0, void 0, function* () {
+exports.WAIT = (timer = 0) => __awaiter(void 0, void 0, void 0, function* () {
     return new Promise((resolve) => {
         setTimeout(() => {
             resolve('resolved');
-        }, 0);
+        }, timer);
     });
 });
-exports.pathOnly = (string) => {
-    let destDir = string;
-    const destArray = string.split('/');
+exports.pathOnly = (str) => {
+    let destDir = str;
+    const destArray = str.split('/');
     if (destArray[destArray.length - 1].includes('.')) {
         destArray.pop();
         destDir = destArray.join('/');
@@ -32,9 +35,9 @@ exports.pathOnly = (string) => {
     return destDir;
 };
 exports.isDir = (dir) => {
-    return path.extname(path.basename(dir)) ? false : true;
+    return path_1.default.extname(path_1.default.basename(dir)) ? false : true;
 };
 exports.getExt = (file) => {
-    return path.extname(file.replace('.template', ''));
+    return path_1.default.extname(file.replace('.template', ''));
 };
 //# sourceMappingURL=misc.js.map

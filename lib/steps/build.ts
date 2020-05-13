@@ -1,7 +1,8 @@
 import path from 'path';
 import ejs from 'ejs';
 import * as log from 'cli-block';
-import { asyncForEach, WAIT, isDir, getExt, helpers } from '../utils';
+import { asyncForEach, WAIT, isDir, getExt } from '../utils';
+import * as convert from 'str-convert';
 
 const BUILD_CHECK_FILENAMES = async (data: any) => {
 	await WAIT();
@@ -41,7 +42,7 @@ const BUILD_FILES = async (data: any) => {
 	await asyncForEach(data.templates, async (template) => {
 		let i = 0;
 		await asyncForEach(data.dataSets, (set) => {
-			const settingDestination = data.settings.destination;
+			const settingDestination = data.settings.dest;
 
 			let fileName;
 			let dirPath;
@@ -74,7 +75,7 @@ const BUILD_FILES = async (data: any) => {
 				data: ejs.render(template.data, {
 					settings: data.settings,
 					colors: set.colors,
-					_: { ...helpers }
+					_: { ...convert }
 				}),
 				path: filePath
 			});

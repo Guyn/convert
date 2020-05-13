@@ -1,1 +1,1 @@
-export declare const START: () => Promise<() => Promise<any>>;
+export declare const START: () => Promise<void>;

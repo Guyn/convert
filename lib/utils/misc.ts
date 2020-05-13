@@ -1,22 +1,25 @@
-const path = require('path');
+import path from 'path';
 
-export const asyncForEach = async (array: any, callback: any) => {
+export const asyncForEach = async (
+	array: any,
+	callback: any
+): Promise<void> => {
 	for (let index = 0; index < array.length; index++) {
 		await callback(array[index], index, array);
 	}
 };
 
-export const WAIT = async () => {
+export const WAIT = async (timer: number = 0): Promise<string> => {
 	return new Promise((resolve) => {
 		setTimeout(() => {
 			resolve('resolved');
-		}, 0);
+		}, timer);
 	});
 };
 
-export const pathOnly = (string: string) => {
-	let destDir = string;
-	const destArray = string.split('/');
+export const pathOnly = (str: string): string => {
+	let destDir = str;
+	const destArray = str.split('/');
 	if (destArray[destArray.length - 1].includes('.')) {
 		destArray.pop();
 		destDir = destArray.join('/');
@@ -24,10 +27,10 @@ export const pathOnly = (string: string) => {
 	return destDir;
 };
 
-export const isDir = (dir: string) => {
+export const isDir = (dir: string): boolean => {
 	return path.extname(path.basename(dir)) ? false : true;
 };
 
-export const getExt = (file: string) => {
+export const getExt = (file: string): string => {
 	return path.extname(file.replace('.template', ''));
 };

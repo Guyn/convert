@@ -1,16 +1,17 @@
 import { bold, yellow } from 'kleur';
 import * as log from 'cli-block';
 import { hexToRgb, hexToHsl } from '../color';
-import { WAIT } from '../utils';
+import { WAIT, asyncForEach } from '../utils';
+import { DataTypes, ColorDataType, ColorDataSetType } from '../types';
 
-const CONVERT_COLORDATA = async (data) => {
+const CONVERT_COLORDATA = async (data: DataTypes): Promise<DataTypes> => {
 	await WAIT();
-	const dataSets = [];
+	const dataSets: ColorDataSetType[] = [];
 
-	data.source.forEach((file) => {
+	await asyncForEach(data.source, async (file) => {
 		const colorData = [];
 
-		Object.keys(file.parsed).forEach((color) => {
+		await asyncForEach(Object.keys(file.parsed), (color: string) => {
 			const hexColor = file.parsed[color];
 			colorData.push({
 				name: color,
@@ -28,12 +29,12 @@ const CONVERT_COLORDATA = async (data) => {
 	return { ...data, dataSets };
 };
 
-const LOG_CONVERTS = (data) => {
+const LOG_CONVERTS = async (data: DataTypes): Promise<DataTypes> => {
 	if (data.source.length > 1) log.BLOCK_MID('Source Files');
 	else log.BLOCK_MID('Source File');
 
-	data.dataSets.forEach((file) => {
-		log.BLOCK_LINE(`${yellow().bold(file.name.toUpperCase())}`);
+	await asyncForEach(data.dataSets, async (set: ColorDataSetType[]) => {
+		log.BLOCK_LINE(`${yellow().bold(set.name)}`);
 		log.BLOCK_LINE();
 		// LOG.LINE(`${LOG.repeat("-", 100)}`);
 		log.BLOCK_ROW_LINE([
@@ -46,8 +47,9 @@ const LOG_CONVERTS = (data) => {
 
 		// console.log(LOG, LOG.spacedText(20, "hoi"));
 
-		file.colors.forEach((color) => {
-			log.BLOCK_ROW_LINE([color.name, color.hex, color.hsl, color.rgb]);
+		await asyncForEach(set.colors, (value: ColorDataType) => {
+			const rowLine = [value.name, value.hex, value.hsl, value.rgb];
+			log.BLOCK_ROW_LINE(rowLine);
 		});
 		log.BLOCK_LINE();
 	});
@@ -57,7 +59,7 @@ const LOG_CONVERTS = (data) => {
 
 	return data;
 };
-const COMBINE_IF_SET = (data) => {
+const COMBINE_IF_SET = async (data: DataTypes): Promise<DataTypes> => {
 	if (!data.settings.combine) return data;
 
 	// const setName = data.dataSets[0].name;

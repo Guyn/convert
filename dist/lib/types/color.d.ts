@@ -1,4 +1,4 @@
-import { fullCircleType, EightBitype, UnitIntervalType, percentageScaleType } from "./numbers";
+import { fullCircleType, EightBitype, UnitIntervalType, percentageScaleType } from './numbers';
 export declare type hexType = string & {
     __isHexCode: true;
 };

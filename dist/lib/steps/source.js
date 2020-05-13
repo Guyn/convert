@@ -24,11 +24,11 @@ const path_1 = __importDefault(require("path"));
 const log = __importStar(require("cli-block"));
 const utils_1 = require("../utils");
 const GET_SOURCE_FILES = (data) => __awaiter(void 0, void 0, void 0, function* () {
-    if (!data.settings.source)
+    if (!data.settings.src)
         return Object.assign({}, data);
     let srcFiles = [];
-    let files = [];
-    let source = data.settings.source;
+    const files = [];
+    const source = data.settings.src;
     // Check whether source is a file or a folder.
     const isDir = path_1.default.extname(path_1.default.basename(source)) ? false : true;
     if (isDir)
@@ -50,9 +50,9 @@ const GET_SOURCE_FILES = (data) => __awaiter(void 0, void 0, void 0, function* (
     }));
     return Object.assign(Object.assign({}, data), { source: files });
 });
-const FILTER_FILES = (data) => {
-    return Object.assign(Object.assign({}, data), { source: data.source.filter((file) => file.type == '.json') });
-};
+const FILTER_FILES = (data) => __awaiter(void 0, void 0, void 0, function* () {
+    return Object.assign(Object.assign({}, data), { source: data.source.filter((file) => file.type === '.json') });
+});
 const LOG_SOURCE_FILES = (data) => {
     if (data.error)
         log.BLOCK_ERRORS(data.error);

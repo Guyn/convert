@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = require("fs");
 const utils_1 = require("../utils");
 exports.FOLDERS = (data) => __awaiter(void 0, void 0, void 0, function* () {
-    const destDir = utils_1.pathOnly(data.settings.destination);
+    const destDir = utils_1.pathOnly(data.settings.dest);
     try {
         yield fs_1.promises.lstat(destDir);
     }

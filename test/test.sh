@@ -25,6 +25,7 @@ node dist/cli.js \
     --type css \
     --type json \
     --type js \
+    --type ts \
     --type less 
 
 echo "> 05: Create a Multiple files from source"
@@ -35,6 +36,7 @@ node dist/cli.js \
     --type css \
     --type json \
     --type js \
+    --type ts \
     --type less 
 
 echo "> 06: Multi-source-ext-temp Create a Multiple files from source with external template"

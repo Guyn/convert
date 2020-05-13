@@ -10,14 +10,15 @@
 	},
 	"scripts": {
 		"test": "npm run build && jest --verbose && npm run test:success && npm run test:procreate",
-		"test:success": "npm run build && sh test/test.sh",
-		"test:errors": "npm run build && sh test/errors.sh",
-		"test:procreate": "npm run build && sh test/procreate.sh",
+		"test:happy": "sh test/happy.sh",
+		"test:success": "sh test/test.sh",
+		"test:errors": "sh test/errors.sh",
+		"test:procreate": "sh test/procreate.sh",
 		"test:npx": "npx guyner --src test/source/valid/sourc1.json --dest tmp/npx-test --template scss",
 		"lint": "eslint --ext .js,.ts --ignore-path .gitignore .",
 		"lint:fix": "eslint --ext .js,.ts --ignore-path .gitignore . --fix",
 		"build": "tsc",
-		"build:dev": "tsc"
+		"build:dev": "tsc -w"
 	},
 	"repository": {
 		"type": "git",
@@ -36,11 +37,12 @@
 	"homepage": "https://github.com/guyn/convert#readme",
 	"dependencies": {
 		"ansi-256-colors": "^1.1.0",
-		"cli-block": "^1.1.4",
+		"cli-block": "^1.1.6",
 		"ejs": "^3.0.1",
 		"jszip": "^3.2.2",
 		"kleur": "^3.0.3",
 		"mono-str-width": "^1.0.0",
+		"str-convert": "0.0.1",
 		"window-size": "^1.1.1",
 		"yargs": "^15.1.0"
 	},

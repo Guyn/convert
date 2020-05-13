@@ -4,7 +4,7 @@ const {
 	hexToHsl,
 	rgbToHsl,
 	hslToRgb,
-	hslToHex,
+	hslToHex
 } = require('./convert');
 
 test('HEX to RGB', () => {
@@ -19,7 +19,7 @@ test('RGB to HSL', () => {
 	expect(rgbToHsl({ r: 255, g: 0, b: 0 })).toStrictEqual({
 		h: 0,
 		s: 100,
-		l: 50,
+		l: 50
 	});
 });
 
@@ -27,7 +27,7 @@ test('HSL to RGB', () => {
 	expect(hslToRgb({ h: 120, s: 100, l: 50 })).toStrictEqual({
 		r: 0,
 		g: 255,
-		b: 0,
+		b: 0
 	});
 });
 

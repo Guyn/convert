@@ -23,9 +23,9 @@ const utils_1 = require("../utils");
 const CONVERT_COLORDATA = (data) => __awaiter(void 0, void 0, void 0, function* () {
     yield utils_1.WAIT();
     const dataSets = [];
-    data.source.forEach((file) => {
+    yield utils_1.asyncForEach(data.source, (file) => __awaiter(void 0, void 0, void 0, function* () {
         const colorData = [];
-        Object.keys(file.parsed).forEach((color) => {
+        yield utils_1.asyncForEach(Object.keys(file.parsed), (color) => {
             const hexColor = file.parsed[color];
             colorData.push({
                 name: color,
@@ -38,16 +38,16 @@ const CONVERT_COLORDATA = (data) => __awaiter(void 0, void 0, void 0, function* 
             name: file.name,
             colors: colorData
         });
-    });
+    }));
     return Object.assign(Object.assign({}, data), { dataSets });
 });
-const LOG_CONVERTS = (data) => {
+const LOG_CONVERTS = (data) => __awaiter(void 0, void 0, void 0, function* () {
     if (data.source.length > 1)
         log.BLOCK_MID('Source Files');
     else
         log.BLOCK_MID('Source File');
-    data.dataSets.forEach((file) => {
-        log.BLOCK_LINE(`${kleur_1.yellow().bold(file.name.toUpperCase())}`);
+    yield utils_1.asyncForEach(data.dataSets, (color) => __awaiter(void 0, void 0, void 0, function* () {
+        log.BLOCK_LINE(`${kleur_1.yellow().bold(color.name)}`);
         log.BLOCK_LINE();
         // LOG.LINE(`${LOG.repeat("-", 100)}`);
         log.BLOCK_ROW_LINE([
@@ -58,18 +58,19 @@ const LOG_CONVERTS = (data) => {
         ]);
         log.BLOCK_LINE();
         // console.log(LOG, LOG.spacedText(20, "hoi"));
-        file.colors.forEach((color) => {
-            log.BLOCK_ROW_LINE([color.name, color.hex, color.hsl, color.rgb]);
+        yield utils_1.asyncForEach(color.colors, (value) => {
+            const rowLine = [value.name, value.hex, value.hsl, value.rgb];
+            log.BLOCK_ROW_LINE(rowLine);
         });
         log.BLOCK_LINE();
-    });
+    }));
     if (data.error)
         log.BLOCK_ERRORS(data.error);
     if (data.warning)
         log.BLOCK_WARNINGS(data.warning);
     return data;
-};
-const COMBINE_IF_SET = (data) => {
+});
+const COMBINE_IF_SET = (data) => __awaiter(void 0, void 0, void 0, function* () {
     if (!data.settings.combine)
         return data;
     // const setName = data.dataSets[0].name;
@@ -78,7 +79,7 @@ const COMBINE_IF_SET = (data) => {
         combinedSet.colors = [...combinedSet.colors, ...data.dataSets[i].colors];
     }
     return Object.assign(Object.assign({}, data), { dataSets: [combinedSet] });
-};
+});
 exports.CONVERT = (data) => __awaiter(void 0, void 0, void 0, function* () {
     return CONVERT_COLORDATA(data)
         .then(COMBINE_IF_SET)

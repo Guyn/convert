@@ -23,6 +23,7 @@ const path_1 = __importDefault(require("path"));
 const ejs_1 = __importDefault(require("ejs"));
 const log = __importStar(require("cli-block"));
 const utils_1 = require("../utils");
+const convert = __importStar(require("str-convert"));
 const BUILD_CHECK_FILENAMES = (data) => __awaiter(void 0, void 0, void 0, function* () {
     yield utils_1.WAIT();
     const error = [];
@@ -61,7 +62,7 @@ const BUILD_FILES = (data) => __awaiter(void 0, void 0, void 0, function* () {
     yield utils_1.asyncForEach(data.templates, (template) => __awaiter(void 0, void 0, void 0, function* () {
         let i = 0;
         yield utils_1.asyncForEach(data.dataSets, (set) => {
-            const settingDestination = data.settings.destination;
+            const settingDestination = data.settings.dest;
             let fileName;
             let dirPath;
             if (utils_1.isDir(settingDestination)) {
@@ -86,7 +87,7 @@ const BUILD_FILES = (data) => __awaiter(void 0, void 0, void 0, function* () {
                 data: ejs_1.default.render(template.data, {
                     settings: data.settings,
                     colors: set.colors,
-                    _: Object.assign({}, utils_1.helpers)
+                    _: Object.assign({}, convert)
                 }),
                 path: filePath
             });

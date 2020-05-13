@@ -16,12 +16,10 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const log = __importStar(require("cli-block"));
-const settings_1 = require("./settings");
+const clog = __importStar(require("cli-block"));
 const utils_1 = require("../utils");
 exports.START = () => __awaiter(void 0, void 0, void 0, function* () {
     yield utils_1.WAIT();
-    log.START('Start building!');
-    return settings_1.SETTINGS;
+    clog.START('Start building!');
 });
 //# sourceMappingURL=start.js.map

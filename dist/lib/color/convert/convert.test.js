@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const { hexToRgb, hexToHsl, rgbToHsl, hslToRgb, hslToHex, } = require('./convert');
+const { hexToRgb, hexToHsl, rgbToHsl, hslToRgb, hslToHex } = require('./convert');
 test('HEX to RGB', () => {
     expect(hexToRgb('#ff0000')).toStrictEqual({ r: 255, g: 0, b: 0 });
 });
@@ -11,14 +11,14 @@ test('RGB to HSL', () => {
     expect(rgbToHsl({ r: 255, g: 0, b: 0 })).toStrictEqual({
         h: 0,
         s: 100,
-        l: 50,
+        l: 50
     });
 });
 test('HSL to RGB', () => {
     expect(hslToRgb({ h: 120, s: 100, l: 50 })).toStrictEqual({
         r: 0,
         g: 255,
-        b: 0,
+        b: 0
     });
 });
 test('HSL to HEX', () => {

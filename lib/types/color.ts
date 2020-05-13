@@ -3,7 +3,7 @@ import {
 	EightBitype,
 	UnitIntervalType,
 	percentageScaleType
-} from "./numbers";
+} from './numbers';
 
 export type hexType = string & { __isHexCode: true };
 export const isHexCode = (x: string): x is hexType => {

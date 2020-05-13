@@ -28,7 +28,7 @@ const argv = yargs_1.default.options({
     title: { type: 'string', default: null },
     src: { type: 'string', default: null },
     dest: { type: 'string', default: null },
-    ext: { type: 'string', default: null },
+    ext: { type: 'array', default: [] },
     template: { type: 'string', default: null },
     combine: { type: 'boolean', default: false },
     filename: { type: 'string', default: null },
@@ -39,10 +39,9 @@ const argv = yargs_1.default.options({
     }
 }).argv;
 const AVAILABLE_OPTIONS = (data) => __awaiter(void 0, void 0, void 0, function* () {
-    const templates = yield fs_1.promises.readdir(data.settings.templatePath).then((res) => {
-        return res.map((file) => {
-            return path_1.default.extname(file.replace('.template', ''));
-        });
+    const templates = yield fs_1.promises.readdir(data.settings.templatePath);
+    templates.map((file) => {
+        return path_1.default.extname(file.replace('.template', ''));
     });
     return {
         ext: templates
@@ -50,7 +49,7 @@ const AVAILABLE_OPTIONS = (data) => __awaiter(void 0, void 0, void 0, function* 
 });
 const CHECK_SETTINGS_HAS_OUTPUTFILE = (data) => __awaiter(void 0, void 0, void 0, function* () {
     const errors = [];
-    const ext = path_1.default.extname(path_1.default.basename(data.settings.destination));
+    const ext = path_1.default.extname(path_1.default.basename(data.settings.dest));
     const hasOutputfile = ext ? true : false;
     if (hasOutputfile) {
         const options = yield AVAILABLE_OPTIONS(data);
@@ -63,7 +62,7 @@ const CHECK_SETTINGS_HAS_OUTPUTFILE = (data) => __awaiter(void 0, void 0, void 0
     }
     return Object.assign(Object.assign({}, data), { error: errors });
 });
-const CHECK_SETTINGS_HAS_TYPE_OR_TEMPLATE = (data) => {
+const CHECK_SETTINGS_HAS_TYPE_OR_TEMPLATE = (data) => __awaiter(void 0, void 0, void 0, function* () {
     const errors = [];
     // If the destination doesn't include a file.
     if (data.settings.template && data.settings.ext) {
@@ -73,17 +72,7 @@ const CHECK_SETTINGS_HAS_TYPE_OR_TEMPLATE = (data) => {
         errors.push('You have to specify either an output extension or a template.');
     }
     return Object.assign(Object.assign({}, data), { error: errors });
-};
-const CONVERT_TO_ARRAY_WHERE_NECESSARY = (data) => {
-    // If only one
-    if (typeof data.settings.ext == 'string')
-        data.settings.ext = [data.settings.ext];
-    if (typeof data.settings.filename == 'string')
-        data.settings.filename = [data.settings.filename];
-    if (typeof data.settings.template == 'string')
-        data.settings.template = [data.settings.template];
-    return Object.assign({}, data);
-};
+});
 const CHECK_PROCREATE_TITLE = (data) => {
     const errors = [];
     // If the destination doesn't include a file.
@@ -95,11 +84,72 @@ const CHECK_PROCREATE_TITLE = (data) => {
     return Object.assign(Object.assign({}, data), { error: errors });
 };
 const GET_SETTINGS = () => __awaiter(void 0, void 0, void 0, function* () {
-    yield utils_1.WAIT();
-    const settings = Object.assign(Object.assign({}, argv), { source: argv.src, destination: argv.dest, ext: argv.type, prefix: argv.prefix ? `${argv.prefix}-` : '', templatePath: argv.templatePath
-            ? argv.templatePath
-            : path_1.default.join(__dirname, '../../templates') });
-    return { settings };
+    yield utils_1.WAIT(0); // Needs an await to make it usuable as steps.
+    const settings = yargs_1.default.options({
+        src: {
+            require: true,
+            type: 'string',
+            default: null,
+            alias: 'source'
+        },
+        dest: {
+            require: true,
+            type: 'string',
+            default: null,
+            alias: 'destination'
+        },
+        type: {
+            required: false,
+            type: 'array',
+            alias: 'ext'
+        },
+        prefix: {
+            required: false,
+            type: 'string',
+            alias: 'prefix'
+        },
+        templatePath: {
+            required: false,
+            type: 'string',
+            default: path_1.default.join(__dirname, '../../../templates')
+        },
+        template: {
+            required: false,
+            type: 'string',
+            default: null
+        },
+        combine: {
+            required: false,
+            type: 'boolean',
+            default: false
+        },
+        filename: {
+            required: false,
+            type: 'string',
+            default: null
+        },
+        title: {
+            required: false,
+            type: 'string',
+            default: null
+        }
+    }).argv;
+    return {
+        settings: {
+            src: settings.src,
+            dest: settings.dest,
+            ext: settings.type,
+            prefix: settings.prefix,
+            templatePath: settings.templatePath,
+            template: settings.template,
+            filename: settings.filename,
+            combine: settings.combine,
+            title: settings.title
+        },
+        source: [],
+        error: [],
+        warning: []
+    };
 });
 const LOG_SETTINGS = (data) => __awaiter(void 0, void 0, void 0, function* () {
     log.BLOCK_START('Settings');
@@ -114,7 +164,6 @@ exports.SETTINGS = () => __awaiter(void 0, void 0, void 0, function* () {
     return GET_SETTINGS()
         .then(CHECK_SETTINGS_HAS_OUTPUTFILE)
         .then(CHECK_SETTINGS_HAS_TYPE_OR_TEMPLATE)
-        .then(CONVERT_TO_ARRAY_WHERE_NECESSARY)
         .then(CHECK_PROCREATE_TITLE)
         .then(LOG_SETTINGS)
         .then((res) => {
