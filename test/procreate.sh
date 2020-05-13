@@ -1,6 +1,6 @@
     
 echo "> 01: Procreate - Test conversion to ProCreate type swatches"
-node cli.js \
+node dist/cli.js \
     --src test/source/valid/source1.json \
     --dest tmp/01-procreate/Test.swatches \
     --title GuynTest \
